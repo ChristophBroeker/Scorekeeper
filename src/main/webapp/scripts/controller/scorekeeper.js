@@ -34,8 +34,8 @@ ScoreKeeperCtrl.config(function ($routeProvider){
 
 
 ScoreKeeperCtrl.controller('ScoreKeeperCtrl',
-    ['$scope','$route', 'PlayerFactory', '$location',
-        function($scope, $route, PlayerFactory, $location) {
+    ['$scope','$route', '$location',
+        function($scope, $route, $location) {
 
 
 
@@ -68,9 +68,9 @@ ScoreKeeperCtrl.controller('LoginCtrl',
 
 
 ScoreKeeperCtrl.controller('BoardCtrl',
-    ['$scope','$route',
-        function($scope, $route) {
-
+    ['$scope','$route', 'PlayerFactory',
+        function($scope, $route, PlayerFactory) {
+         $scope.board = PlayerFactory.getScoreTable();
 
 
         }

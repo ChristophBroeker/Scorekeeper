@@ -1,11 +1,26 @@
 
 <div class="container" ng-controller="BoardCtrl">
 
-
-         <!--<img src="assets/img/bild.gif">-->
-          Hier kommt die Tabelle hin
-
-
+    <table class="table">
+        <thead>
+            <th>Position:</th>
+            <th>Name:</th>
+            <th>Score:</th>
+            <th>Spiele:</th>
+            <th>gewonnen:</th>
+            <th>verloren:</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="player in board">
+              <td>{{player.pos}}</td>
+              <td>{{player.name}}</td>
+              <td>{{player.score}}</td>
+              <td>{{player.games}}</td>
+              <td>{{player.wins}}</td>
+              <td>{{player.lost}}</td>
+          </tr>
+        </tbody>
+    </table>
 
 
 </div>

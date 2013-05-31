@@ -13,7 +13,7 @@ PlayerService.factory('PlayerFactory', function($resource){
 
 
         getScoreTable: function(){
-            return  $resource('getScoreTable', {}, {query: {method:'GET', isArray:true}}).query();
+            return  $resource('scripts/mocks/scoretable.json', {}, {query: {method:'GET', isArray:true}}).query();
         }
 
 
