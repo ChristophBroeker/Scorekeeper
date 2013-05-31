@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="scorekeeper">
+<head>
+    <title>SCOREKEEPER</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="scripts/libs/angular.js"></script>
+    <script src="scripts/libs/angular-resource.js"></script>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="scripts/services/player.js"></script>
+    <script src="scripts/controller/scorekeeper.js"></script>
+    <style>
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+    </style>
+
+</head>
+<body>
+
+
+
+            <div class="navbar navbar-inverse navbar-fixed-top"   >
+                <div class="navbar-inner">
+                    <div class="container">
+
+                        <a class="brand" href="#home">SCOREKEEPER</a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav" ng-controller="NavCtrl">
+
+                                <li ng-class="navClass('board')"><a href="#board">Tabelle</a></li>
+                                <li ng-class="navClass('games')"><a href="#games">Spiele</a></li>
+                                <li ng-class="navClass('player')"><a href="#player">Spieler</a></li>
+                                <li ng-class="navClass('admin')"><a href="#admin">Administration</a></li>
+
+                            </ul>
+                            <form class="navbar-form pull-right" ng-controller="LoginCtrl">
+                                <input class="span2" type="text" placeholder="Email">
+                                <input class="span2" type="password" placeholder="Password">
+                                <button type="submit" class="btn">Sign in</button>
+                            </form>
+                        </div><!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+
+           <div ng-view></div>
+
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="scripts/libs/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="scripts/libs/bootstrap.min.js"></script>
+</body>
+</html>
