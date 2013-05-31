@@ -77,9 +77,10 @@ ScoreKeeperCtrl.controller('BoardCtrl',
     ]);
 
 ScoreKeeperCtrl.controller('GamesCtrl',
-    ['$scope','$route',
-        function($scope, $route) {
-
+    ['$scope','$route', 'PlayerFactory',
+        function($scope, $route, PlayerFactory) {
+            $scope.playerNames = PlayerFactory.getAllPlayerNames();
+            $scope.games = PlayerFactory.getAllGames();
 
 
         }

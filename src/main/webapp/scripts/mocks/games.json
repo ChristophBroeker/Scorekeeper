@@ -1,0 +1,51 @@
+ [
+    {
+        "date":"2013-05-03",
+        "teams":
+        [
+            {
+                "player":[{"name":"ANM"}, {"name":"DIL"}],
+                "points":2,
+                "result":"won"
+            },{
+                "player":[{"name":"MAH"}, {"name":"TIG"}],
+                "points":0,
+                "result":"lost"
+            }
+        ]
+
+    },
+     {
+        "date":"2013-05-04",
+        "teams":
+        [
+            {
+                "player":[{"name":"ANM"}, {"name":"DIL"}],
+                "points":1,
+                "result":"lost"
+            },{
+                "player":[{"name":"MAH"}, {"name":"TIG"}],
+                "points":2,
+                "result":"won"
+            }
+        ]
+
+     },
+     {
+         "date":"2013-05-05",
+         "teams":
+         [
+             {
+                "player":[{"name":"ANM"}, {"name":"DIL"}],
+                "points":2,
+                 "result":"won"
+             },{
+                "player":[{"name":"MAH"}, {"name":"TIG"}],
+                "points":0,
+             "result":"lost"
+             }
+         ]
+
+     }
+]
+

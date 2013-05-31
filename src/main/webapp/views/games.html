@@ -1,9 +1,60 @@
 
 <div class="container" ng-controller="GamesCtrl">
 
+    <form class="form-inline" ng-controller="GamesCtrl">
+        <h5>neues Spiel eintragen</h5>
+        <select class="span2">
+            <option ng-repeat="player in playerNames">{{player.name}}</option>
+        </select>
+        <select class="span2">
+            <option>leer</option>
+            <option ng-repeat="player in playerNames">{{player.name}}</option>
+        </select>
+        <input class="span1" type="text" placeholder="Punkte">      <br/>
+        <select class="span2">
+            <option ng-repeat="player in playerNames">{{player.name}}</option>
+        </select>
+        <select class="span2">
+            <option>leer</option>
+            <option ng-repeat="player in playerNames">{{player.name}}</option>
+        </select>
+        <input class="span1" type="text" placeholder="Punkte">
+        <button type="submit" class="btn">Ab dafür</button>
+    </form>
 
+    <style>
+        .won{
+           /*background-color: #00ff00;*/
+           background: rgba(0, 255, 0, .2);
+        }
 
-          Hier kommt die Spielübersicht hin
+        .lost{
+            background: rgba(255, 0, 0, .4);
+        }
+
+    </style>
+    <table class="table">
+        <thead>
+            <th>Datum:</th>
+            <th>Spieler1:</th>
+            <th>Spieler2:</th>
+            <th>Punkte:</th>
+            <th>Spieler1:</th>
+            <th>Spieler2:</th>
+            <th>Punkte:</th>
+        </thead>
+        <tbody>
+        <tr ng-repeat="game in games">
+            <td>{{game.date}}</td>
+            <td>{{game.teams[0].player[0].name}}</td>
+            <td>{{game.teams[0].player[1].name}}</td>
+            <td class="{{game.teams[0].result}}">{{game.teams[0].points}}</td>
+            <td>{{game.teams[1].player[0].name}}</td>
+            <td>{{game.teams[1].player[1].name}}</td>
+            <td class="{{game.teams[1].result}}">{{game.teams[1].points}}</td>
+        </tr>
+        </tbody>
+    </table>
 
 
 
