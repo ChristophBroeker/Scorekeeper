@@ -1,24 +1,27 @@
 
 <div class="container" ng-controller="GamesCtrl">
 
-    <form class="form-inline" ng-controller="GamesCtrl">
+    <form class="form-inline" ng-submit="addNewGame()">
         <h5>neues Spiel eintragen</h5>
-        <select class="span2">
-            <option ng-repeat="player in playerNames">{{player.name}}</option>
-        </select>
-        <select class="span2">
+        <select class="span2" ng-model="newGame.teams[0].player[0].name">
             <option>leer</option>
             <option ng-repeat="player in playerNames">{{player.name}}</option>
         </select>
-        <input class="span1" type="text" placeholder="Punkte">      <br/>
-        <select class="span2">
-            <option ng-repeat="player in playerNames">{{player.name}}</option>
-        </select>
-        <select class="span2">
+        <select class="span2" ng-model="newGame.teams[0].player[1].name">
             <option>leer</option>
             <option ng-repeat="player in playerNames">{{player.name}}</option>
         </select>
-        <input class="span1" type="text" placeholder="Punkte">
+        <input class="span1" type="text" placeholder="Punkte" ng-model="newGame.teams[0].points">
+        <br/>
+        <select class="span2" ng-model="newGame.teams[1].player[0].name">
+            <option>leer</option>
+            <option ng-repeat="player in playerNames">{{player.name}}</option>
+        </select>
+        <select class="span2" ng-model="newGame.teams[1].player[1].name">
+            <option>leer</option>
+            <option ng-repeat="player in playerNames">{{player.name}}</option>
+        </select>
+        <input class="span1" type="text" placeholder="Punkte" ng-model="newGame.teams[1].points">
         <button type="submit" class="btn">Ab dafür</button>
     </form>
 

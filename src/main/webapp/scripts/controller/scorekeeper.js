@@ -55,10 +55,10 @@ ScoreKeeperCtrl.controller('NavCtrl',
     ]);
 
 ScoreKeeperCtrl.controller('LoginCtrl',
-    ['$scope','$route',
-        function($scope, $route) {
+    ['$scope','$route','PlayerFactory',
+        function($scope, $route, PlayerFactory) {
             $scope.loginFunction = function () {
-
+                PlayerFactory.login($scope.login, $scope.password);
 
             };
         }
@@ -82,6 +82,29 @@ ScoreKeeperCtrl.controller('GamesCtrl',
             $scope.playerNames = PlayerFactory.getAllPlayerNames();
             $scope.games = PlayerFactory.getAllGames();
 
+            var game = {
+                "date":"2013-05-03",
+                "teams":
+                    [
+                        {
+                            "player":[{"name":"leer"}, {"name":"leer"}],
+                            "points":0,
+                            "result":"won"
+                        },{
+                        "player":[{"name":"leer"}, {"name":"leer"}],
+                        "points":0,
+                        "result":"lost"
+                    }
+                    ]
+
+            }
+
+            $scope.newGame = game;
+            $scope.addNewGame = function(){
+
+
+              PlayerFactory.addNewGame(game);
+            };
 
         }
     ]);

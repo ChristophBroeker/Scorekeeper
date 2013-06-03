@@ -35,9 +35,9 @@
                                 <li ng-class="navClass('admin')"><a href="#admin">Administration</a></li>
 
                             </ul>
-                            <form class="navbar-form pull-right" ng-controller="LoginCtrl">
-                                <input class="span2" type="text" placeholder="Login">
-                                <input class="span2" type="password" placeholder="Password">
+                            <form class="navbar-form pull-right" ng-controller="LoginCtrl" ng-submit="loginFunction()">
+                                <input class="span2" ng-model="login" type="text" placeholder="Login">
+                                <input class="span2" ng-model="password" type="password" placeholder="Password">
                                 <button type="submit" class="btn">Sign in</button>
                             </form>
                         </div><!--/.nav-collapse -->
