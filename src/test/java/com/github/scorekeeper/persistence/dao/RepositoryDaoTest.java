@@ -23,6 +23,10 @@ public class RepositoryDaoTest extends AbstractTransactionalJUnit4SpringContextT
 		player = playerRepository.save(player);
 
 		Assert.assertNotNull(player.getId());
+
+		Player byNamePlayer = playerRepository.findByName("X. Ample");
+		Assert.assertNotNull(byNamePlayer);
+		Assert.assertEquals(byNamePlayer.getName(), "X. Ample");
 	}
 
 }
