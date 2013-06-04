@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var ScoreKeeperCtrl = angular.module('scorekeeper', ['scorekeeper.services'], null);
+var ScoreKeeperCtrl = angular.module('scorekeeper', ['scorekeeper.services', 'user.services'], null);
 ScoreKeeperCtrl.config(function ($routeProvider){
     $routeProvider
         .when('/board',
@@ -55,10 +55,10 @@ ScoreKeeperCtrl.controller('NavCtrl',
     ]);
 
 ScoreKeeperCtrl.controller('LoginCtrl',
-    ['$scope','$route','PlayerFactory',
-        function($scope, $route, PlayerFactory) {
+    ['$scope','$route','UserService',
+        function($scope, $route, UserService) {
             $scope.loginFunction = function () {
-                PlayerFactory.login($scope.login, $scope.password);
+                UserService.login($scope.login, $scope.password);
 
             };
         }
@@ -68,19 +68,19 @@ ScoreKeeperCtrl.controller('LoginCtrl',
 
 
 ScoreKeeperCtrl.controller('BoardCtrl',
-    ['$scope','$route', 'PlayerFactory',
-        function($scope, $route, PlayerFactory) {
-         $scope.board = PlayerFactory.getScoreTable();
+    ['$scope','$route', 'PlayerService',
+        function($scope, $route, PlayerService) {
+         $scope.board = PlayerService.getScoreTable();
 
 
         }
     ]);
 
 ScoreKeeperCtrl.controller('GamesCtrl',
-    ['$scope','$route', 'PlayerFactory',
-        function($scope, $route, PlayerFactory) {
-            $scope.playerNames = PlayerFactory.getAllPlayerNames();
-            $scope.games = PlayerFactory.getAllGames();
+    ['$scope','$route', 'PlayerService',
+        function($scope, $route, PlayerService) {
+            $scope.playerNames = PlayerService.getAllPlayerNames();
+            $scope.games = PlayerService.getAllGames();
 
             var game = {
                 "date":"2013-05-03",
@@ -103,7 +103,7 @@ ScoreKeeperCtrl.controller('GamesCtrl',
             $scope.addNewGame = function(){
 
 
-              PlayerFactory.addNewGame(game);
+                PlayerService.addNewGame(game);
             };
 
         }

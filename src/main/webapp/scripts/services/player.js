@@ -8,13 +8,10 @@
 
 var PlayerService = angular.module('scorekeeper.services', ['ngResource'], null);
 
-PlayerService.factory('PlayerFactory', function($resource){
+PlayerService.factory('PlayerService', function($resource){
     return {
 
-        login: function(login, password){
-            console.log("login: "+login +" password: "+password);
-            return  true;
-        },
+
 
          getAllPlayerNames: function(){
              return  $resource('scripts/mocks/playerNames.json', {}, {query: {method:'GET', isArray:true}}).query();
