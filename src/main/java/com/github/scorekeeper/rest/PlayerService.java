@@ -17,4 +17,7 @@ public interface PlayerService {
 	@Transactional
 	public abstract Player findById(Long id);
 
+	@Transactional
+	public abstract Iterable<Player> findAllPlayers();
+
 }

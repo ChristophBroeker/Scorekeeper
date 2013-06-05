@@ -32,4 +32,12 @@ public class PlayerServiceImpl implements PlayerService {
 
 	}
 
+	@Override
+	@Transactional
+	public Iterable<Player> findAllPlayers() {
+
+		Iterable<Player> players = repo.findAll();
+		return players;
+	}
+
 }

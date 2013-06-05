@@ -36,9 +36,9 @@ public class ScorekeeperService {
 	@RequestMapping(value = "players", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public Player getAllPlayers() {
+	public Iterable<Player> getAllPlayers() {
 
-		return service.findById(new Long(14));
+		return service.findAllPlayers();
 
 	}
 }
