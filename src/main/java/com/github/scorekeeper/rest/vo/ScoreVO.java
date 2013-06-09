@@ -1,18 +1,11 @@
-package com.github.scorekeeper.persistence.entity;
+package com.github.scorekeeper.rest.vo;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.github.scorekeeper.persistence.entity.Score;
 
-@Entity
-public class Score {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ScoreVO {
 	private Long id;
 
 	private Calendar captured;
@@ -20,6 +13,16 @@ public class Score {
 	private BigDecimal mean;
 
 	private BigDecimal standardDeviation;
+
+	public ScoreVO() {
+	}
+
+	public ScoreVO(Score score) {
+		this.captured = (Calendar) score.getCaptured().clone();
+		this.mean = score.getMean();
+		this.standardDeviation = score.getStandardDeviation();
+		this.id = score.getId();
+	}
 
 	public Long getId() {
 		return id;

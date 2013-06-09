@@ -5,6 +5,5 @@
 
 	<import resource="classpath:persistence-context.xml"/>
 	<import resource="classpath:beans-context.xml"/>
-	<import resource="classpath:webmvc-context.xml"/>
 
 </beans>

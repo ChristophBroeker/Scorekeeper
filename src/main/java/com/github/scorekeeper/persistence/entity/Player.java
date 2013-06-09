@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 
 @Entity
 public class Player {
@@ -22,6 +23,7 @@ public class Player {
 	private String name;
 
 	@OneToMany(cascade = CascadeType.ALL)
+	@OrderColumn
 	private List<Score> scoreHistory = new ArrayList<>();
 
 	public Long getId() {
@@ -46,6 +48,22 @@ public class Player {
 
 	public void setScoreHistory(List<Score> scoreHistory) {
 		this.scoreHistory = scoreHistory;
+	}
+
+	public void addScore(Score score) {
+		if (this.scoreHistory == null) {
+			this.scoreHistory = new ArrayList<>();
+		}
+
+		this.scoreHistory.add(score);
+	}
+
+	public Score getLatestScore() {
+		if (scoreHistory.isEmpty()) {
+			return null;
+		}
+
+		return scoreHistory.get(scoreHistory.size() - 1);
 	}
 
 }

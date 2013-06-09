@@ -7,7 +7,8 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>src/main/webapp/WEB-INF/webmvc-context.xml</config>
+		<config>src/main/resources/webmvc-context.xml</config>
+		<config>src/main/resources/beans-context.xml</config>
 	</configs>
 	<configSets>
 	</configSets>
