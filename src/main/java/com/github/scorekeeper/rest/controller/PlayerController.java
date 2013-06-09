@@ -32,7 +32,7 @@ public class PlayerController {
 		return playerService.findPlayerById(id);
 	}
 
-	@RequestMapping(value = "/{name}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/{name}", method = RequestMethod.POST)
 	@ResponseBody
 	public Long addPlayer(@PathVariable("name") String name) {
 		return playerService.addPlayer(name);

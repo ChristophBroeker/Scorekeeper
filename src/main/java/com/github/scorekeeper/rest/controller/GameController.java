@@ -21,7 +21,7 @@ public class GameController {
 	@Resource
 	private GameService gameService;
 
-	@RequestMapping(value = "", method = RequestMethod.PUT)
+	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ResponseBody
 	public Long addGame(@RequestBody GameVO game) {
 		return gameService.addGame(game);
