@@ -1,5 +1,6 @@
 package com.github.scorekeeper.rest.controller;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -24,6 +25,7 @@ public class GameController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ResponseBody
 	public Long addGame(@RequestBody GameVO game) {
+		game.setPlayedDate(new GregorianCalendar());
 		return gameService.addGame(game);
 	}
 

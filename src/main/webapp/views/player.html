@@ -3,7 +3,36 @@
 
 
 
-          Hier kommt die Einzelspielerübersicht hin
+    <form class="form-inline" ng-submit="addNewPlayer()">
+        <h5>neuen Spieler hinzufügen</h5>
+
+        <input class="span3" type="text" placeholder="Spielername" ng-model="newPlayer">
+
+        <button type="submit" class="btn">Ab dafür</button>
+    </form>
+
+    <table class="table">
+        <thead>
+        <th>id:</th>
+        <th>Name:</th>
+        <th>captured:</th>
+        <th>mean:</th>
+        <th>standardDeviation:</th>
+
+        </thead>
+        <tbody>
+        <tr ng-repeat="player in players">
+            <td>{{player.id}}</td>
+            <td>{{player.name}}</td>
+            <td>{{player.currentScore.captured}}</td>
+            <td>{{player.currentScore.mean}}</td>
+            <td>{{player.currentScore.standardDeviation}}</td>
+
+        </tr>
+        </tbody>
+    </table>
+
+
 
 
 

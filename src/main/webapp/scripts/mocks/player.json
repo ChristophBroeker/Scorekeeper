@@ -1,0 +1,59 @@
+ [
+     {  "id":1,
+        "name":"ANM",
+        "scoreHistory":[
+            {
+                "id":11,
+                "mean":12.45,
+                "standardDeviation": 45.12
+            }
+        ]},
+     {  "id":2,
+         "name":"DIL",
+         "scoreHistory":[
+             {
+                 "id":12,
+                 "mean":12.45,
+                 "standardDeviation": 45.12
+             }
+         ]},
+     {  "id":3,
+         "name":"FRM",
+         "scoreHistory":[
+             {
+                 "id":13,
+                 "mean":12.45,
+                 "standardDeviation": 45.12
+             }
+         ]},
+     {  "id":4,
+         "name":"TIG",
+         "scoreHistory":[
+             {
+                 "id":14,
+                 "mean":12.45,
+                 "standardDeviation": 45.12
+             }
+         ]},
+     {  "id":5,
+         "name":"DAB",
+         "scoreHistory":[
+             {
+                 "id":15,
+                 "mean":12.45,
+                 "standardDeviation": 45.12
+             }
+         ]},
+     {  "id":6,
+         "name":"MAH",
+         "scoreHistory":[
+             {
+                 "id":16,
+                 "mean":12.45,
+                 "standardDeviation": 45.12
+             }
+         ]}
+
+
+    ]
+

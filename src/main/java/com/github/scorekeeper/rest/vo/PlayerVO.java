@@ -13,7 +13,12 @@ public class PlayerVO {
 	public PlayerVO(Player player) {
 		this.id = player.getId();
 		this.name = player.getName();
-		this.currentScore = new ScoreVO(player.getScoreHistory().get(player.getScoreHistory().size() - 1));
+		try {
+			this.currentScore = new ScoreVO(player.getScoreHistory().get(player.getScoreHistory().size() - 1));
+		} catch (Exception e) {
+			this.currentScore = new ScoreVO();
+		}
+
 	}
 
 	public Long getId() {

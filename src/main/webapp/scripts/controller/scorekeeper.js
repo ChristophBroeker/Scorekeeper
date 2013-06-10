@@ -79,40 +79,50 @@ ScoreKeeperCtrl.controller('BoardCtrl',
 ScoreKeeperCtrl.controller('GamesCtrl',
     ['$scope','$route', 'PlayerService',
         function($scope, $route, PlayerService) {
-            $scope.playerNames = PlayerService.getAllPlayerNames();
+            $scope.playerNames = PlayerService.getAllPlayer();
             $scope.games = PlayerService.getAllGames();
 
             var game = {
-                "date":"2013-05-03",
-                "teams":
+
+                "teamA":
                     [
-                        {
-                            "player":[{"name":"leer"}, {"name":"leer"}],
-                            "points":0,
-                            "result":"won"
-                        },{
-                        "player":[{"name":"leer"}, {"name":"leer"}],
-                        "points":0,
-                        "result":"lost"
-                    }
-                    ]
+                       0
+                    ],
+                "teamB":[ 0
+                ],
+                "teamAScore":0,
+                "teamBScore":0,
+                "result":"WIN_A"
+
 
             }
 
             $scope.newGame = game;
             $scope.addNewGame = function(){
+                if(game.teamAScore > game.teamBScore){
+                    game.result = "WIN_A";
+                }else if(game.teamAScore < game.teamBScore){
+                    game.result = "WIN_B";
+                }else{
+                    game.result = "DRAW";
+                }
+                $scope.games = PlayerService.addNewGame(game);
 
-
-                PlayerService.addNewGame(game);
             };
 
         }
     ]);
 
 ScoreKeeperCtrl.controller('PlayerCtrl',
-    ['$scope','$route',
-        function($scope, $route) {
+    ['$scope','$route', 'PlayerService',
+        function($scope, $route, PlayerService) {
+         //$scope.newPlayer = "Horst";
 
+         $scope.players = PlayerService.getAllPlayer();
+         $scope.addNewPlayer = function(){
+             var playerName = $scope.newPlayer;
+             $scope.players = PlayerService.addNewPlayer(playerName);
+         }
 
 
         }
