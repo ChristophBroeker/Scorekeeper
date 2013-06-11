@@ -51,7 +51,6 @@ public class PlayerVO implements Comparable<PlayerVO> {
 	public int compareTo(PlayerVO o) {
 		// TODO Auto-generated method stub
 		BigDecimal diff = o.currentScore.getMean().subtract(getCurrentScore().getMean());
-		return diff.intValue();
+		return diff.multiply(new BigDecimal(100)).intValue();
 	}
-
 }
