@@ -43,12 +43,22 @@ public class PlayerService {
 	}
 
 	@Transactional
-	public Long addPlayer(@PathVariable("name") String name) {
+	public Player addPlayer(@PathVariable("name") String name) {
 		Player player = new Player();
 		player.setName(name);
 
 		player = playerRepository.save(player);
-		return player.getId();
+		return player;
+	}
+
+	@Transactional
+	public void deletePlayer(@PathVariable("id") Long id) {
+
+		Player p = playerRepository.findOne(id);
+		if (p.getScoreHistory() == null || p.getScoreHistory().size() == 0) {
+			playerRepository.delete(id);
+		}
+
 	}
 
 	private static List<PlayerVO> convert(Iterable<Player> players) {

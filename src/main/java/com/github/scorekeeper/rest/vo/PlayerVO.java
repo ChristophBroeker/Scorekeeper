@@ -1,8 +1,10 @@
 package com.github.scorekeeper.rest.vo;
 
+import java.math.BigDecimal;
+
 import com.github.scorekeeper.persistence.entity.Player;
 
-public class PlayerVO {
+public class PlayerVO implements Comparable<PlayerVO> {
 	private Long id;
 	private String name;
 	private ScoreVO currentScore;
@@ -43,6 +45,13 @@ public class PlayerVO {
 
 	public void setCurrentScore(ScoreVO currentScore) {
 		this.currentScore = currentScore;
+	}
+
+	@Override
+	public int compareTo(PlayerVO o) {
+		// TODO Auto-generated method stub
+		BigDecimal diff = o.currentScore.getMean().subtract(getCurrentScore().getMean());
+		return diff.intValue();
 	}
 
 }

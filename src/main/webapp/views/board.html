@@ -12,9 +12,9 @@
         </thead>
         <tbody>
           <tr ng-repeat="player in board">
-              <td>{{player.pos}}</td>
+              <td>{{$index + 1}}</td>
               <td>{{player.name}}</td>
-              <td>{{player.score}}</td>
+              <td>{{player.currentScore.mean}}</td>
               <td>{{player.games}}</td>
               <td>{{player.wins}}</td>
               <td>{{player.lost}}</td>

@@ -18,6 +18,7 @@
         <th>captured:</th>
         <th>mean:</th>
         <th>standardDeviation:</th>
+        <th>löschen:</th>
 
         </thead>
         <tbody>
@@ -27,7 +28,7 @@
             <td>{{player.currentScore.captured}}</td>
             <td>{{player.currentScore.mean}}</td>
             <td>{{player.currentScore.standardDeviation}}</td>
-
+            <td><button ng-click="removePlayer(player.id)" ng-disabled="{{player.currentScore == null}}">löschen</button></td>
         </tr>
         </tbody>
     </table>

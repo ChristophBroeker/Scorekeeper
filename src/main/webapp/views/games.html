@@ -3,21 +3,22 @@
     <form class="form-inline" ng-submit="addNewGame()">
         <h5>neues Spiel eintragen</h5>
         <select class="span2" ng-model="newGame.teamA[0]">
-            <option>0</option>
+            <option value="">Team A Pl. 1</option>
             <option ng-repeat="player in playerNames" value="{{player.id}}">{{player.name}}</option>
         </select>
         <select class="span2" ng-model="newGame.teamA[1]">
-            <option>0</option>
+            <option value="">Team A Pl. 2</option>
             <option ng-repeat="player in playerNames" value="{{player.id}}">{{player.name}}</option>
         </select>
         <input class="span1" type="text" placeholder="Punkte" ng-model="newGame.teamAScore">
         <br/>
+        <br/>
         <select class="span2" ng-model="newGame.teamB[0]">
-            <option>0</option>
+            <option value="">Team B Pl. 1</option>
             <option ng-repeat="player in playerNames" value="{{player.id}}">{{player.name}}</option>
         </select>
         <select class="span2" ng-model="newGame.teamB[1]">
-            <option>0</option>
+            <option value="">Team B Pl. 2</option>
             <option ng-repeat="player in playerNames" value="{{player.id}}">{{player.name}}</option>
         </select>
         <input class="span1" type="text" placeholder="Punkte" ng-model="newGame.teamBScore">
@@ -25,37 +26,48 @@
     </form>
 
     <style>
-        .won{
+        .teama{
            /*background-color: #00ff00;*/
-           background: rgba(0, 255, 0, .2);
+           background: rgba(122, 122, 122, .2);
         }
 
-        .lost{
-            background: rgba(255, 0, 0, .4);
+        .teamb{
+            background: rgba(80, 80, 80, .2);
         }
 
     </style>
+
     <table class="table">
+        <thead>
+            <th>&nbsp;</th>
+            <th colspan="2">Team A</th>
+            <th colspan="2">Team B</th>
+
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+
+        </thead>
         <thead>
             <th>Datum:</th>
             <th>Spieler1:</th>
             <th>Spieler2:</th>
-            <th>Punkte:</th>
+
             <th>Spieler1:</th>
             <th>Spieler2:</th>
-            <th>Punkte:</th>
-            <th>Result:</th>
+            <th>Ergebnis:</th>
+
         </thead>
         <tbody>
         <tr ng-repeat="game in games">
             <td>{{game.playedDate}}</td>
-            <td>{{game.teamA[0]}}</td>
-            <td>{{game.teamA[1]}}</td>
-            <td>{{game.teamAScore}}</td>
-            <td>{{game.teamB[0]}}</td>
-            <td>{{game.teamB[1]}}</td>
-            <td>{{game.teamBScore}}</td>
-            <td>{{game.result}}</td>
+            <td class="teama">{{playerService.getPlayer(game.teamA[0])}}</td>
+            <td class="teama">{{playerService.getPlayer(game.teamA[1])}}</td>
+
+            <td class="teamb">{{playerService.getPlayer(game.teamB[0])}}</td>
+            <td class="teamb">{{playerService.getPlayer(game.teamB[1])}}</td>
+            <td>{{game.teamAScore}} : {{game.teamBScore}}</td>
+
         </tr>
         </tbody>
     </table>

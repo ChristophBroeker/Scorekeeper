@@ -6,8 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var ScoreKeeperCtrl = angular.module('scorekeeper', ['scorekeeper.services', 'user.services'], null);
-ScoreKeeperCtrl.config(function ($routeProvider){
+var ScoreKeeper = angular.module('scorekeeper', ['player.services', 'game.services', 'user.services'], null);
+ScoreKeeper.config(function ($routeProvider){
     $routeProvider
         .when('/board',
         {
@@ -33,17 +33,17 @@ ScoreKeeperCtrl.config(function ($routeProvider){
 });
 
 
-ScoreKeeperCtrl.controller('ScoreKeeperCtrl',
+ScoreKeeper.controller('ScoreKeeperCtrl',
     ['$scope','$route', '$location',
         function($scope, $route, $location) {
 
 
 
-            //$scope.scoreTable = PlayerFactory.getScoreTable();
+
 
         }
     ]);
-ScoreKeeperCtrl.controller('NavCtrl',
+ScoreKeeper.controller('NavCtrl',
     ['$scope','$route', '$location',
         function($scope, $route, $location) {
             $scope.navClass = function (page) {
@@ -54,7 +54,7 @@ ScoreKeeperCtrl.controller('NavCtrl',
         }
     ]);
 
-ScoreKeeperCtrl.controller('LoginCtrl',
+ScoreKeeper.controller('LoginCtrl',
     ['$scope','$route','UserService',
         function($scope, $route, UserService) {
             $scope.loginFunction = function () {
@@ -67,7 +67,7 @@ ScoreKeeperCtrl.controller('LoginCtrl',
 
 
 
-ScoreKeeperCtrl.controller('BoardCtrl',
+ScoreKeeper.controller('BoardCtrl',
     ['$scope','$route', 'PlayerService',
         function($scope, $route, PlayerService) {
          $scope.board = PlayerService.getScoreTable();
@@ -76,19 +76,21 @@ ScoreKeeperCtrl.controller('BoardCtrl',
         }
     ]);
 
-ScoreKeeperCtrl.controller('GamesCtrl',
-    ['$scope','$route', 'PlayerService',
-        function($scope, $route, PlayerService) {
-            $scope.playerNames = PlayerService.getAllPlayer();
-            $scope.games = PlayerService.getAllGames();
+ScoreKeeper.controller('GamesCtrl',
+    ['$scope','$route', 'PlayerService', 'GameService',
+        function($scope, $route, PlayerService, GameService) {
+            $scope.playerNames = PlayerService.getAllPlayers();
+            $scope.games = GameService.getAllGames();
+            $scope.playerService = PlayerService;
+
 
             var game = {
 
                 "teamA":
                     [
-                       0
+
                     ],
-                "teamB":[ 0
+                "teamB":[
                 ],
                 "teamAScore":0,
                 "teamBScore":0,
@@ -106,29 +108,36 @@ ScoreKeeperCtrl.controller('GamesCtrl',
                 }else{
                     game.result = "DRAW";
                 }
-                $scope.games = PlayerService.addNewGame(game);
+                GameService.addNewGame(game);
 
             };
 
         }
     ]);
 
-ScoreKeeperCtrl.controller('PlayerCtrl',
+ScoreKeeper.controller('PlayerCtrl',
     ['$scope','$route', 'PlayerService',
         function($scope, $route, PlayerService) {
-         //$scope.newPlayer = "Horst";
 
-         $scope.players = PlayerService.getAllPlayer();
+
+         $scope.players = PlayerService.getAllPlayers();
          $scope.addNewPlayer = function(){
+             console.log('CTRL - addNewPlayer');
              var playerName = $scope.newPlayer;
-             $scope.players = PlayerService.addNewPlayer(playerName);
-         }
+             //$scope.players = PlayerService.addNewPlayer(playerName);
+             PlayerService.addNewPlayer(playerName);
+         };
+         $scope.removePlayer = function(playerId){
+             console.log("removePlayer: "+playerId);
 
+             PlayerService.removePlayer(playerId);
+
+          };
 
         }
     ]);
 
-ScoreKeeperCtrl.controller('AdminCtrl',
+ScoreKeeper.controller('AdminCtrl',
     ['$scope','$route',
         function($scope, $route) {
 
