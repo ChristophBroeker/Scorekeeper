@@ -32,6 +32,40 @@ ScoreKeeper.config(function ($routeProvider){
         })
 });
 
+ScoreKeeper.filter('playerName',
+    ['PlayerService',
+        function(PlayerService){
+            return function(playerId){
+                return PlayerService.getPlayer(playerId);
+            }
+        }
+    ]);
+
+ScoreKeeper.filter('gameListFilter',
+    ['PlayerService',
+        function(PlayerService){
+            return function(items, playerName){
+                if(playerName == null){
+                    return items;
+                }
+                console.log('gameListFilter',arguments);
+                var filtered = [];
+                angular.forEach(items, function(item) {
+                    var teamAPlayer1 = PlayerService.getPlayer(item.teamA[0]);
+                    var teamAPlayer2 = PlayerService.getPlayer(item.teamA[1]);
+                    var teamBPlayer1 = PlayerService.getPlayer(item.teamB[0]);
+                    var teamBPlayer2 = PlayerService.getPlayer(item.teamB[1]);
+                    if( teamAPlayer1.toLowerCase().match("^"+playerName.toLowerCase())
+                        || teamAPlayer2.toLowerCase().match("^"+playerName.toLowerCase())
+                        || teamBPlayer1.toLowerCase().match("^"+playerName.toLowerCase())
+                        || teamBPlayer2.toLowerCase().match("^"+playerName.toLowerCase())){
+                        filtered.push(item);
+                    }
+                });
+                return filtered;
+            }
+        }
+    ]);
 
 ScoreKeeper.controller('ScoreKeeperCtrl',
     ['$scope','$route', '$location',
@@ -80,26 +114,36 @@ ScoreKeeper.controller('GamesCtrl',
     ['$scope','$route', 'PlayerService', 'GameService',
         function($scope, $route, PlayerService, GameService) {
             $scope.playerNames = PlayerService.getAllPlayers();
-            $scope.games = GameService.getAllGames();
-            $scope.playerService = PlayerService;
 
-
-            var game = {
-
-                "teamA":
-                    [
-
-                    ],
-                "teamB":[
-                ],
+            $scope.itemsPerPage = 10;
+            $scope.currentListPage = 0;
+            $scope.games = GameService.getAllGames($scope.itemsPerPage, $scope.currentListPage);
+            var game = {"teamA":[],
+                "teamB":[],
                 "teamAScore":0,
                 "teamBScore":0,
                 "result":"WIN_A"
-
-
             }
 
             $scope.newGame = game;
+            $scope.showMoreItems = function(){
+                $scope.currentListPage = 0;
+                $scope.games =GameService.getAllGames($scope.itemsPerPage,$scope.currentListPage);
+            };
+            $scope.raiseListPage = function(){
+                 if($scope.games.length == $scope.itemsPerPage){
+                     $scope.currentListPage = $scope.currentListPage + 1;
+                     $scope.games =GameService.getAllGames($scope.itemsPerPage,$scope.currentListPage);
+                 }
+
+            };
+            $scope.derateListPage = function(){
+                if($scope.currentListPage > 0){
+                    $scope.currentListPage = $scope.currentListPage - 1;
+                    $scope.games =GameService.getAllGames($scope.itemsPerPage,$scope.currentListPage);
+                }
+
+            };
             $scope.addNewGame = function(){
                 if(game.teamAScore > game.teamBScore){
                     game.result = "WIN_A";
@@ -118,22 +162,19 @@ ScoreKeeper.controller('GamesCtrl',
 ScoreKeeper.controller('PlayerCtrl',
     ['$scope','$route', 'PlayerService',
         function($scope, $route, PlayerService) {
-
-
          $scope.players = PlayerService.getAllPlayers();
+
          $scope.addNewPlayer = function(){
              console.log('CTRL - addNewPlayer');
              var playerName = $scope.newPlayer;
-             //$scope.players = PlayerService.addNewPlayer(playerName);
+
              PlayerService.addNewPlayer(playerName);
          };
+
          $scope.removePlayer = function(playerId){
              console.log("removePlayer: "+playerId);
-
              PlayerService.removePlayer(playerId);
-
           };
-
         }
     ]);
 

@@ -36,7 +36,7 @@
         }
 
     </style>
-
+    <input type="text" ng-model="searchText" placeholder="nach Spieler filtern"/>
     <table class="table">
         <thead>
             <th>&nbsp;</th>
@@ -59,19 +59,40 @@
 
         </thead>
         <tbody>
-        <tr ng-repeat="game in games">
-            <td>{{game.playedDate}}</td>
-            <td class="teama">{{playerService.getPlayer(game.teamA[0])}}</td>
-            <td class="teama">{{playerService.getPlayer(game.teamA[1])}}</td>
 
-            <td class="teamb">{{playerService.getPlayer(game.teamB[0])}}</td>
-            <td class="teamb">{{playerService.getPlayer(game.teamB[1])}}</td>
+        <!--<tr ng-repeat="game in games | gameListFilter:searchText">-->
+        <tr ng-repeat="game in games | gameListFilter:searchText | orderBy:'-playedDate'">
+            <td>{{game.playedDate | date:'dd.MM.yyyy HH:mm'}}</td>
+            <td class="teama">{{game.teamA[0] | playerName}}</td>
+            <td class="teama">{{game.teamA[1] | playerName}}</td>
+
+            <td class="teamb">{{game.teamB[0] | playerName}}</td>
+            <td class="teamb">{{game.teamB[1] | playerName}}</td>
             <td>{{game.teamAScore}} : {{game.teamBScore}}</td>
 
         </tr>
         </tbody>
     </table>
+    <form  class="row form-inline">
 
+            <div>Seite: {{currentListPage + 1}}</div>
+
+
+                <select class="span2" ng-model="itemsPerPage" ng-change="showMoreItems()">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="200">200</option>
+                    <option value="500">500</option>
+                    <option value="1000">1000</option>
+
+                </select>
+                 <a class="btn btn-primary" ng-click="derateListPage()">Previous</a>
+                 <a class="btn btn-primary" ng-click="raiseListPage()">Next</a>
+
+
+    </form>
 
 
 

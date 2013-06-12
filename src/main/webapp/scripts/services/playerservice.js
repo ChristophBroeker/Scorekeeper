@@ -10,7 +10,7 @@ var PlayerService = angular.module('player.services', ['ngResource'], null);
 
 PlayerService.service('PlayerService', function($resource, $http){
 
-    var playerList = null;
+       var playerList = null;
 
         this.getAllPlayers = function(){
             console.log("get all Players");
@@ -58,18 +58,27 @@ PlayerService.service('PlayerService', function($resource, $http){
 
 
        this.getPlayer = function(playerId){
+           console.log('getPlayer');
+
            for (var i = playerList.length -1; i>=0;i--){
-               if(playerList[i].id === playerId){
+               if(playerList[i].id == playerId){
+                   //playerList[i].name = playerList[i].name +1;
                    return playerList[i].name;
 
                }
            }
+           return "";
            //return $resource('rest/players/:playerId', {playerId:playerId}, {query: {method:'GET', isArray:true}}).query();
-       }
+       };
 
 
        this.getScoreTable = function(){
             return  $resource('rest/players/scoreboard', {}, {query: {method:'GET', isArray:true}}).query();
+       };
+
+        this.getPlayerIdsByName = function(playerName){
+
+              return [12];
         };
 
 

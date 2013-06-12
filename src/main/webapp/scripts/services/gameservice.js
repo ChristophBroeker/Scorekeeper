@@ -12,12 +12,12 @@ GameService.service('GameService', function($resource, $http){
 
     var gameList = null;
 
-        this.getAllGames = function(){
-            console.log("get all Games");
-            if(gameList == null){
+        this.getAllGames = function(pageSize, forPage){
+            console.log("get all Games_ "+pageSize + " "+forPage);
 
-                gameList = $resource('rest/games', {pageSize: 100, page:0 }, {query: {method:'GET', isArray:true}}).query();
-            }
+
+                gameList = $resource('rest/games', {pageSize: pageSize, page:forPage}, {query: {method:'GET', isArray:true}}).query();
+
 
             return gameList
 
@@ -29,6 +29,7 @@ GameService.service('GameService', function($resource, $http){
         console.log("add new Game");
         $http({method: 'POST',url: 'rest/games',data: newGame})
             .success(function(response) {
+
                 gameList.push(newGame);
                 console.log('success: '+response.data);
             })
@@ -36,17 +37,5 @@ GameService.service('GameService', function($resource, $http){
                 console.log('error: '+response);
             });
     };
-
-
-
-
-
-
-
-
-
-
-
-
 });
 
