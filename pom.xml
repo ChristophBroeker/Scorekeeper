@@ -18,7 +18,7 @@
 			<id>dev</id>
 			<properties>
 				<db.driverClassName>org.h2.Driver</db.driverClassName>
-				<db.url>jdbc:h2:~/scorekeeper-db.h2</db.url>
+				<db.url>jdbc:h2:~/scorekeeper-db</db.url>
 				<db.username>sa</db.username>
 				<db.password></db.password>
 				<jpa.database>H2</jpa.database>
@@ -126,6 +126,21 @@
             <artifactId>jackson-mapper-asl</artifactId>
             <version>1.9.9</version>
         </dependency>
+        <dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>3.1.4.RELEASE</version>
+		</dependency> 
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>3.1.4.RELEASE</version>
+		</dependency> 
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>3.1.4.RELEASE</version>
+		</dependency>
 	</dependencies>
 
 	<build>

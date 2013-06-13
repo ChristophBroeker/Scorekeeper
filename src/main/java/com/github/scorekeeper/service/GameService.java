@@ -1,6 +1,7 @@
 package com.github.scorekeeper.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
@@ -30,6 +31,7 @@ import com.github.scorekeeper.persistence.entity.Player;
 import com.github.scorekeeper.persistence.entity.ResultType;
 import com.github.scorekeeper.persistence.entity.Score;
 import com.github.scorekeeper.rest.vo.GameVO;
+import com.github.scorekeeper.rest.vo.ScoreBoardEntryVO;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
@@ -181,11 +183,21 @@ public class GameService {
 					rating = new Rating(PlayerService.DEFAULT_INITIAL_MEAN.doubleValue(),
 							PlayerService.DEFAULT_INITIAL_STANDARD_DEVIATION.doubleValue());
 				} else {
-					rating = new Rating(latestScore.getMean().doubleValue(), player.getLatestScore()
-							.getStandardDeviation().doubleValue());
+					rating = new Rating(latestScore.getMean().doubleValue(),
+							player.getLatestScore().getStandardDeviation().doubleValue());
 				}
 				put(new JSkillPlayerAdapter(player), rating);
 			}
 		}
+	}
+
+	@Transactional
+	public List<ScoreBoardEntryVO> getScoreBoard() {
+		List<Object[]> sc = gameRepository.getScoreBoard();
+		List<ScoreBoardEntryVO> result = new ArrayList<ScoreBoardEntryVO>();
+		for (Object[] sce : sc) {
+			result.add(new ScoreBoardEntryVO(sce));
+		}
+		return result;
 	}
 }

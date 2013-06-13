@@ -17,15 +17,15 @@ ScoreKeeper.config(function ($routeProvider){
 
         }).when('/player',
         {
-            templateUrl: "views/player.html"
+            templateUrl: "views/secure/player.html"
 
         }).when('/games',
         {
-            templateUrl: "views/games.html"
+            templateUrl: "views/secure/games.html"
 
         }).when('/admin',
         {
-            templateUrl: "views/admin.html"
+            templateUrl: "views/secure/admin/admin.html"
 
         }).otherwise({
             templateUrl: "views/home.html"
@@ -68,9 +68,33 @@ ScoreKeeper.filter('gameListFilter',
     ]);
 
 ScoreKeeper.controller('ScoreKeeperCtrl',
-    ['$scope','$route', '$location',
-        function($scope, $route, $location) {
+    ['$rootScope','$route', '$location','UserService',
+        function($rootScope, $route, $location, UserService) {
 
+            $rootScope.user = UserService.getUser();
+
+
+            $rootScope.hasRole = function(role) {
+
+                if ($rootScope.user === undefined) {
+                    return false;
+                }
+                if ($rootScope.user.roles === undefined) {
+                    return false;
+                }
+                if ($rootScope.user.roles[role] === undefined) {
+                    return false;
+                }
+
+                return $rootScope.user.roles[role];
+            };
+
+            $rootScope.isLoggedIn = function(){
+                if ($rootScope.user === undefined || $rootScope.user.name === 'anonymous') {
+                    return false;
+                }
+                return true;
+            };
 
 
 
@@ -102,9 +126,9 @@ ScoreKeeper.controller('LoginCtrl',
 
 
 ScoreKeeper.controller('BoardCtrl',
-    ['$scope','$route', 'PlayerService',
-        function($scope, $route, PlayerService) {
-         $scope.board = PlayerService.getScoreTable();
+    ['$scope','$route', 'GameService',
+        function($scope, $route, GameService) {
+         $scope.board = GameService.getScoreTable();
 
 
         }

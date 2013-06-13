@@ -10,7 +10,7 @@
     <script src="scripts/controller/scorekeeper.js"></script>
     <script src="scripts/services/playerservice.js"></script>
     <script src="scripts/services/gameservice.js"></script>
-    <script src="scripts/services/user.js"></script>
+    <script src="scripts/services/userservice.js"></script>
 
     <style>
         body {
@@ -20,7 +20,7 @@
     </style>
 
 </head>
-<body>
+<body ng-controller="ScoreKeeperCtrl">
 
 
 
@@ -33,16 +33,25 @@
                             <ul class="nav" ng-controller="NavCtrl">
 
                                 <li ng-class="navClass('board')"><a href="#board">Tabelle</a></li>
-                                <li ng-class="navClass('games')"><a href="#games">Spiele</a></li>
-                                <li ng-class="navClass('player')"><a href="#player">Spieler</a></li>
-                                <li ng-class="navClass('admin')"><a href="#admin">Administration</a></li>
+                                <li ng-class="navClass('games')"><a href="#games" ng-show="hasRole('user')">Spiele</a></li>
+                                <li ng-class="navClass('player')"><a href="#player" ng-show="hasRole('user')">Spieler</a></li>
+                                <li ng-class="navClass('admin')"><a href="#admin" ng-show="hasRole('admin')">Administration</a></li>
 
                             </ul>
-                            <form class="navbar-form pull-right" ng-controller="LoginCtrl" ng-submit="loginFunction()">
-                                <input class="span2" ng-model="login" type="text" placeholder="Login">
-                                <input class="span2" ng-model="password" type="password" placeholder="Password">
+                            <form class="navbar-form pull-right" action="j_spring_security_check" method="POST" ng-show="!isLoggedIn()">
+                                <input class="span2" id="username" name="j_username" type="text" placeholder="Login">
+                                <input class="span2" id="password" name="j_password" type="password" placeholder="Password">
                                 <button type="submit" class="btn">Sign in</button>
                             </form>
+                            <ul class="nav pull-right" ng-show="isLoggedIn()">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">hallo {{user.name}} <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="logout.html">Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+
                         </div><!--/.nav-collapse -->
                     </div>
                 </div>

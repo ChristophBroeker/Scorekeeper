@@ -1,0 +1,32 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                    http://www.springframework.org/schema/security 
+                    http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+    <http use-expressions="true">
+    
+    	<intercept-url method="GET" pattern="/rest/scoreboard" access="permitAll" />
+    	<intercept-url method="GET" pattern="/rest/user" access="permitAll" />
+        <intercept-url method="GET" pattern="/rest/**" access="hasRole('user')" />
+        <intercept-url method="PUT" pattern="/rest/**" access="hasRole('admin')" />
+        <intercept-url method="POST" pattern="/rest/**" access="hasRole('admin')" />
+        <intercept-url method="DELETE" pattern="/rest/**" access="hasRole('admin')" />
+<!--     	<intercept-url pattern="/views/secure/**" access="isAuthenticated()" /> -->
+          
+        <form-login login-page="/index.html"/>
+        <logout logout-url="/logout.html"/>
+    </http>
+
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="admin" password="admin" authorities="admin, user" />
+                
+                <user name="user" password="user" authorities="user" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+</beans:beans>   

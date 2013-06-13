@@ -37,5 +37,9 @@ GameService.service('GameService', function($resource, $http){
                 console.log('error: '+response);
             });
     };
+
+    this.getScoreTable = function(){
+        return  $resource('rest/scoreboard', {}, {query: {method:'GET', isArray:true}}).query();
+    };
 });
 

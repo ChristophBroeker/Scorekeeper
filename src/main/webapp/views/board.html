@@ -13,11 +13,11 @@
         <tbody>
           <tr ng-repeat="player in board">
               <td>{{$index + 1}}</td>
-              <td>{{player.name}}</td>
-              <td>{{player.currentScore.mean}}</td>
-              <td>{{player.games}}</td>
-              <td>{{player.wins}}</td>
-              <td>{{player.lost}}</td>
+              <td>{{player.playerName}}</td>
+              <td>{{player.currentMean}}</td>
+              <td>{{player.playedGames}}</td>
+              <td>{{player.wonGames}}</td>
+              <td>{{player.lostGames}}</td>
           </tr>
         </tbody>
     </table>
