@@ -17,7 +17,7 @@
         <th>Name:</th>
         <th>captured:</th>
         <th>mean:</th>
-        <th>standardDeviation:</th>
+        <th colspan="2">standardDeviation:</th>
         <th ng-show="hasRole('SCOREADMIN')">löschen:</th>
 
         </thead>
@@ -28,6 +28,7 @@
             <td>{{player.currentScore.captured}}</td>
             <td>{{player.currentScore.mean}}</td>
             <td>{{player.currentScore.standardDeviation}}</td>
+            <td><img src="assets/img/line-chart.png" ng-click="openPlayerChart(player)"></td>
             <td ng-show="hasRole('SCOREADMIN')"><button ng-click="removePlayer(player.id)" ng-disabled="player.currentScore.mean > 0">löschen</button></td>
         </tr>
         </tbody>

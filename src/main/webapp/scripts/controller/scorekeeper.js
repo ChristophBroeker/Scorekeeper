@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var ScoreKeeper = angular.module('scorekeeper', ['player.services', 'game.services', 'user.services'], null);
+var ScoreKeeper = angular.module('scorekeeper', ['player.services', 'game.services', 'user.services', 'ui.bootstrap'], null);
 ScoreKeeper.config(function ($routeProvider){
     $routeProvider
         .when('/board',
@@ -66,6 +66,50 @@ ScoreKeeper.filter('gameListFilter',
             }
         }
     ]);
+ScoreKeeper.directive('googleChart', function ($timeout) {
+    return {
+        restrict: 'A',
+        scope: {
+            chart: '=chart'
+        },
+        link: function ($scope, $elm, $attr) {
+            // Watches, to refresh the chart when its data, title or dimensions change
+            $scope.$watch('chart', function () {
+                draw();
+            }, true); // true is for deep object equality checking
+
+            function draw() {
+                if (!draw.triggered && ($scope.chart != undefined)) {
+                    draw.triggered = true;
+                    $timeout(function () {
+                        draw.triggered = false;
+
+                        var dataTable = new google.visualization.DataTable($scope.chart.data, 0.5);
+
+                        var chartWrapperArgs = {
+                            chartType: $scope.chart.type,
+                            dataTable: dataTable,
+                            options: $scope.chart.options,
+                            containerId: $elm[0]
+                        };
+
+                        var chartWrapper = new google.visualization.ChartWrapper(chartWrapperArgs);
+                        google.visualization.events.addListener(chartWrapper, 'ready', function () {
+                            $scope.chart.displayed = true;
+                        });
+                        google.visualization.events.addListener(chartWrapper, 'error', function (err) {
+                            console.log("Chart not displayed due to error: " + err.message);
+                        });
+                        $timeout(function () {
+                            chartWrapper.draw();
+                        });
+                    }, 0, true);
+                }
+            }
+
+        }
+    };
+});
 
 ScoreKeeper.controller('ScoreKeeperCtrl',
     ['$rootScope','$route', '$location','UserService',
@@ -184,8 +228,8 @@ ScoreKeeper.controller('GamesCtrl',
     ]);
 
 ScoreKeeper.controller('PlayerCtrl',
-    ['$scope','$route', 'PlayerService',
-        function($scope, $route, PlayerService) {
+    ['$scope','$route','$dialog', 'PlayerService',
+        function($scope, $route, $dialog, PlayerService) {
          $scope.players = PlayerService.getAllPlayers();
 
          $scope.addNewPlayer = function(){
@@ -199,6 +243,55 @@ ScoreKeeper.controller('PlayerCtrl',
              console.log("removePlayer: "+playerId);
              PlayerService.removePlayer(playerId);
           };
+
+
+
+            $scope.opts = {
+                backdrop: true,
+                keyboard: true,
+                backdropClick: true,
+                templateUrl:  'views/secure/playerchart.html', // OR: templateUrl: 'path/to/view.html',
+                controller: 'PlayerChartCtrl'
+            };
+         $scope.openPlayerChart = function(player){
+            PlayerService.selectedPlayer.player = player;
+            console.log('player: '+player);
+            var d = $dialog.dialog($scope.opts);
+            d.open()
+         };
+        }
+    ]);
+
+ScoreKeeper.controller('PlayerChartCtrl',
+    ['$scope','$route','PlayerService',
+        function($scope, $route, PlayerService) {
+
+            $scope.player =  PlayerService.selectedPlayer.player;
+
+
+            $scope.chart = {
+                "type": "AreaChart",
+                "displayed": true,
+                "cssStyle": "height:400px; width:400;",
+                "data": PlayerService.getHistoryForChart(),
+                "options": {
+                    "title": "Chart fuer "+$scope.player.name,
+                    "isStacked": "false",
+                    "fill": 20,
+                    "displayExactValues": true,
+                    "vAxis": {
+
+                        "gridlines": {
+                            "count": 10
+                        }
+                    },
+                    "hAxis": {
+                        "title": "Date"
+
+                    }
+                }
+            }
+
         }
     ]);
 

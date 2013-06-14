@@ -8,10 +8,76 @@
 
 var PlayerService = angular.module('player.services', ['ngResource'], null);
 
-PlayerService.service('PlayerService', function($resource, $http){
+PlayerService.service('PlayerService', function($resource, $http, $filter){
 
        var playerList = null;
 
+        this.selectedPlayer = {player: null};
+
+
+       this.getHistoryForChart = function(){
+           console.log('getHistoryForChart');
+           var data ={
+               cols: [
+                   {
+                       'id': 'date',
+                       'label': 'Datum',
+                       'type': 'string'
+                   },
+                   {
+                       'id': 'mean',
+                       'label': 'Staerke',
+                       'type': 'number'
+                   },
+                   {
+                       'id': 'deviation',
+                       'label': 'Sicherheit',
+                       'type': 'number'
+                   }
+                   ],
+               rows: [
+                   {
+                       "c": [
+                           {
+                               "v": ""
+                           },
+                           {
+                               "v": 0
+
+                           },
+                           {
+                               "v": 0
+
+                           }
+                       ]
+
+                   }
+
+               ]
+           }
+
+           angular.forEach(this.selectedPlayer.player.scoreHistory, function(item) {
+                     data.rows.push({
+                         "c":[
+                             {
+                                 "v": $filter('date')(item.captured,'dd.MM.yyyy')
+
+                             },
+                             {
+                                 "v": item.mean
+
+                             },
+                             {
+                                 "v": item.standardDeviation
+
+                             }
+                         ]
+                     });
+           });
+
+           console.log('data: '+data.cols);
+           return data;
+       };
         this.getAllPlayers = function(){
             console.log("get all Players");
             if(playerList == null){
