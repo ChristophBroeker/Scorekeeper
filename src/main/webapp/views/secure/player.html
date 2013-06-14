@@ -3,7 +3,7 @@
 
 
 
-    <form class="form-inline" ng-submit="addNewPlayer()">
+    <form class="form-inline" ng-submit="addNewPlayer()" ng-show="hasRole('SCOREADMIN')">
         <h5>neuen Spieler hinzufügen</h5>
 
         <input class="span3" type="text" placeholder="Spielername" ng-model="newPlayer">
@@ -18,7 +18,7 @@
         <th>captured:</th>
         <th>mean:</th>
         <th>standardDeviation:</th>
-        <th>löschen:</th>
+        <th ng-show="hasRole('SCOREADMIN')">löschen:</th>
 
         </thead>
         <tbody>
@@ -28,7 +28,7 @@
             <td>{{player.currentScore.captured}}</td>
             <td>{{player.currentScore.mean}}</td>
             <td>{{player.currentScore.standardDeviation}}</td>
-            <td><button ng-click="removePlayer(player.id)" ng-disabled="{{player.currentScore == null}}">löschen</button></td>
+            <td ng-show="hasRole('SCOREADMIN')"><button ng-click="removePlayer(player.id)" ng-disabled="player.currentScore.mean > 0">löschen</button></td>
         </tr>
         </tbody>
     </table>

@@ -10,12 +10,10 @@
     
     	<intercept-url method="GET" pattern="/rest/scoreboard" access="permitAll" />
     	<intercept-url method="GET" pattern="/rest/user" access="permitAll" />
-        <intercept-url method="GET" pattern="/rest/**" access="hasRole('user')" />
-        <intercept-url method="PUT" pattern="/rest/**" access="hasRole('admin')" />
-        <intercept-url method="POST" pattern="/rest/**" access="hasRole('admin')" />
-        <intercept-url method="DELETE" pattern="/rest/**" access="hasRole('admin')" />
-<!--     	<intercept-url pattern="/views/secure/**" access="isAuthenticated()" /> -->
-          
+        <intercept-url method="GET" pattern="/rest/**" access="isAuthenticated()" />
+        <intercept-url method="PUT" pattern="/rest/games" access="hasRole('SCOREADMIN')" />
+        <intercept-url method="PUT" pattern="/rest/players" access="hasRole('SCOREADMIN')" />
+        
         <form-login login-page="/index.html"/>
         <logout logout-url="/logout.html"/>
     </http>
@@ -23,9 +21,11 @@
     <authentication-manager>
         <authentication-provider>
             <user-service>
-                <user name="admin" password="admin" authorities="admin, user" />
+            <user name="super" password="super" authorities="APPADMIN, SCOREADMIN, USER" />
+                <user name="admin" password="admin" authorities="APPADMIN, USER" />
+                <user name="groomer" password="groomer" authorities="SCOREADMIN, USER" />
                 
-                <user name="user" password="user" authorities="user" />
+                <user name="user" password="user" authorities="USER" />
             </user-service>
         </authentication-provider>
     </authentication-manager>

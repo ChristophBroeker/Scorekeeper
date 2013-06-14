@@ -33,9 +33,9 @@
                             <ul class="nav" ng-controller="NavCtrl">
 
                                 <li ng-class="navClass('board')"><a href="#board">Tabelle</a></li>
-                                <li ng-class="navClass('games')"><a href="#games" ng-show="hasRole('user')">Spiele</a></li>
-                                <li ng-class="navClass('player')"><a href="#player" ng-show="hasRole('user')">Spieler</a></li>
-                                <li ng-class="navClass('admin')"><a href="#admin" ng-show="hasRole('admin')">Administration</a></li>
+                                <li ng-class="navClass('games')"><a href="#games" ng-show="hasRole('USER')">Spiele</a></li>
+                                <li ng-class="navClass('player')"><a href="#player" ng-show="hasRole('USER')">Spieler</a></li>
+                                <li ng-class="navClass('admin')"><a href="#admin" ng-show="hasRole('APPADMIN')">Administration</a></li>
 
                             </ul>
                             <form class="navbar-form pull-right" action="j_spring_security_check" method="POST" ng-show="!isLoggedIn()">

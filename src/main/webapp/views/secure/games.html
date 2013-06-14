@@ -1,6 +1,6 @@
 
 <div class="container" ng-controller="GamesCtrl">
-    <form class="form-inline" ng-submit="addNewGame()">
+    <form class="form-inline" ng-submit="addNewGame()" ng-show="hasRole('SCOREADMIN')">
         <h5>neues Spiel eintragen</h5>
         <select class="span2" ng-model="newGame.teamA[0]">
             <option value="">Team A Pl. 1</option>
