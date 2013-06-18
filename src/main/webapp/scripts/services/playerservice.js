@@ -31,7 +31,7 @@ PlayerService.service('PlayerService', function($resource, $http, $filter){
                    },
                    {
                        'id': 'deviation',
-                       'label': 'Sicherheit',
+                       'label': 'Unsicherheit',
                        'type': 'number'
                    }
                    ],

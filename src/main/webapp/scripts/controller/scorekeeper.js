@@ -32,84 +32,8 @@ ScoreKeeper.config(function ($routeProvider){
         })
 });
 
-ScoreKeeper.filter('playerName',
-    ['PlayerService',
-        function(PlayerService){
-            return function(playerId){
-                return PlayerService.getPlayer(playerId);
-            }
-        }
-    ]);
 
-ScoreKeeper.filter('gameListFilter',
-    ['PlayerService',
-        function(PlayerService){
-            return function(items, playerName){
-                if(playerName == null){
-                    return items;
-                }
-                console.log('gameListFilter',arguments);
-                var filtered = [];
-                angular.forEach(items, function(item) {
-                    var teamAPlayer1 = PlayerService.getPlayer(item.teamA[0]);
-                    var teamAPlayer2 = PlayerService.getPlayer(item.teamA[1]);
-                    var teamBPlayer1 = PlayerService.getPlayer(item.teamB[0]);
-                    var teamBPlayer2 = PlayerService.getPlayer(item.teamB[1]);
-                    if( teamAPlayer1.toLowerCase().match("^"+playerName.toLowerCase())
-                        || teamAPlayer2.toLowerCase().match("^"+playerName.toLowerCase())
-                        || teamBPlayer1.toLowerCase().match("^"+playerName.toLowerCase())
-                        || teamBPlayer2.toLowerCase().match("^"+playerName.toLowerCase())){
-                        filtered.push(item);
-                    }
-                });
-                return filtered;
-            }
-        }
-    ]);
-ScoreKeeper.directive('googleChart', function ($timeout) {
-    return {
-        restrict: 'A',
-        scope: {
-            chart: '=chart'
-        },
-        link: function ($scope, $elm, $attr) {
-            // Watches, to refresh the chart when its data, title or dimensions change
-            $scope.$watch('chart', function () {
-                draw();
-            }, true); // true is for deep object equality checking
 
-            function draw() {
-                if (!draw.triggered && ($scope.chart != undefined)) {
-                    draw.triggered = true;
-                    $timeout(function () {
-                        draw.triggered = false;
-
-                        var dataTable = new google.visualization.DataTable($scope.chart.data, 0.5);
-
-                        var chartWrapperArgs = {
-                            chartType: $scope.chart.type,
-                            dataTable: dataTable,
-                            options: $scope.chart.options,
-                            containerId: $elm[0]
-                        };
-
-                        var chartWrapper = new google.visualization.ChartWrapper(chartWrapperArgs);
-                        google.visualization.events.addListener(chartWrapper, 'ready', function () {
-                            $scope.chart.displayed = true;
-                        });
-                        google.visualization.events.addListener(chartWrapper, 'error', function (err) {
-                            console.log("Chart not displayed due to error: " + err.message);
-                        });
-                        $timeout(function () {
-                            chartWrapper.draw();
-                        });
-                    }, 0, true);
-                }
-            }
-
-        }
-    };
-});
 
 ScoreKeeper.controller('ScoreKeeperCtrl',
     ['$rootScope','$route', '$location','UserService',
@@ -117,6 +41,7 @@ ScoreKeeper.controller('ScoreKeeperCtrl',
 
             $rootScope.user = UserService.getUser();
 
+            $rootScope.availableRoles = ["APPADMIN", "SCOREADMIN", "USER"];
 
             $rootScope.hasRole = function(role) {
 
@@ -280,7 +205,7 @@ ScoreKeeper.controller('PlayerChartCtrl',
                     "fill": 20,
                     "displayExactValues": true,
                     "vAxis": {
-
+                        "maxValue": 50,
                         "gridlines": {
                             "count": 10
                         }
@@ -296,10 +221,29 @@ ScoreKeeper.controller('PlayerChartCtrl',
     ]);
 
 ScoreKeeper.controller('AdminCtrl',
-    ['$scope','$route',
-        function($scope, $route) {
+    ['$scope','$route', 'UserService',
+        function($scope, $route, UserService) {
 
+            $scope.addNewUser = function(){
 
+            };
+
+            $scope.containsRole = function(roles, role){
+                return _.contains(roles, role);
+            }
+
+            $scope.toggleRole = function(user, role){
+                   if( _.contains(user.roles, role)){
+                       var index = _.indexOf(user.roles, role);
+                       user.roles.splice(index,1);
+                   }else{
+                       user.roles.push(role);
+                   }
+
+                console.log("roles: "+user.roles);
+            }
+
+            $scope.userList =  UserService.getAllUser();
 
         }
     ]);

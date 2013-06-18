@@ -3,9 +3,33 @@
 
 
 
-          Hier kommt die Adminansicht hin
+    <form class="form-inline" ng-submit="addNewUser()" ng-show="hasRole('APPADMIN')">
+        <h5>neuen Benutzer hinzufügen</h5>
+
+        <input class="span3" type="text" placeholder="Benutzername" ng-model="newUser">
+
+        <button type="submit" class="btn">Ab dafür</button>
+    </form>
+
+    <table class="table">
+        <thead>
+        <th>id:</th>
+        <th>Name:</th>
+        <th colspan="2">Rollen:</th>
 
 
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in userList">
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td>
+                <div ng-repeat="role in availableRoles">{{role}} - <input type="checkbox" ng-checked="containsRole(user.roles, role)" ng-click="toggleRole(user, role)"/> </div>
+            </td>
 
+
+        </tr>
+        </tbody>
+    </table>
 
 </div>

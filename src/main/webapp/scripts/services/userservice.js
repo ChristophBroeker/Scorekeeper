@@ -16,5 +16,17 @@ UserService.service('UserService', function($resource, $http){
 
         return $resource('rest/user', {}, {query: {method:'GET', isArray:false}}).query();
     };
+
+    this.getAllUser = function() {
+        console.log('getAllUser');
+
+        return $resource('scripts/mocks/user.json', {}, {query: {method:'GET', isArray:true}}).query();
+
+    };
+
+
+    this.addNewUser = function(userName, roles) {
+        console.log('addNewUser');
+    };
 });
 
