@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var ScoreKeeper = angular.module('scorekeeper', ['player.services', 'game.services', 'user.services', 'ui.bootstrap'], null);
+var ScoreKeeper = angular.module('scorekeeper', ['player.services', 'game.services', 'user.services', 'ui.bootstrap', '$strap.directives'], null);
 ScoreKeeper.config(function ($routeProvider){
     $routeProvider
         .when('/board',
@@ -197,7 +197,7 @@ ScoreKeeper.controller('PlayerChartCtrl',
             $scope.chart = {
                 "type": "AreaChart",
                 "displayed": true,
-                "cssStyle": "height:400px; width:400;",
+                "cssStyle": "height:400px; width:500;",
                 "data": PlayerService.getHistoryForChart(),
                 "options": {
                     "title": "Chart fuer "+$scope.player.name,
@@ -225,25 +225,37 @@ ScoreKeeper.controller('AdminCtrl',
         function($scope, $route, UserService) {
 
             $scope.addNewUser = function(){
+                   alert("add New User");
+            };
+
+            $scope.saveRoles = function(user){
 
             };
 
-            $scope.containsRole = function(roles, role){
-                return _.contains(roles, role);
-            }
+            $scope.savedSuccessfull = function(){
+                console.log('do savedSuccessfull')
+            };
 
-            $scope.toggleRole = function(user, role){
-                   if( _.contains(user.roles, role)){
-                       var index = _.indexOf(user.roles, role);
-                       user.roles.splice(index,1);
-                   }else{
-                       user.roles.push(role);
-                   }
 
-                console.log("roles: "+user.roles);
-            }
+
 
             $scope.userList =  UserService.getAllUser();
 
         }
     ]);
+
+ScoreKeeper.directive('saveRoles', function($http) {
+    return {
+        scope:{
+            callback: '&savedSuccessfull'
+        },
+        link: function (scope,element){
+            element.bind("mousedown", function(){
+
+                $('#picOne').fadeIn(1500).delay(3500).fadeOut(1500);
+                scope.callback();
+            })
+        }
+    }
+
+})

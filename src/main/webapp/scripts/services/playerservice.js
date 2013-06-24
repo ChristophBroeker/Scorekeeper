@@ -17,44 +17,9 @@ PlayerService.service('PlayerService', function($resource, $http, $filter){
 
        this.getHistoryForChart = function(){
            console.log('getHistoryForChart');
-           var data ={
-               cols: [
-                   {
-                       'id': 'date',
-                       'label': 'Datum',
-                       'type': 'string'
-                   },
-                   {
-                       'id': 'mean',
-                       'label': 'Staerke',
-                       'type': 'number'
-                   },
-                   {
-                       'id': 'deviation',
-                       'label': 'Unsicherheit',
-                       'type': 'number'
-                   }
-                   ],
-               rows: [
-                   {
-                       "c": [
-                           {
-                               "v": ""
-                           },
-                           {
-                               "v": 0
-
-                           },
-                           {
-                               "v": 0
-
-                           }
-                       ]
-
-                   }
-
-               ]
-           }
+           var data ={cols: [{'id': 'date','label': 'Datum','type': 'string'},{'id': 'mean','label': 'Staerke','type': 'number'},{'id': 'deviation','label': 'Unsicherheit','type': 'number'}],
+               rows: [{"c": [{"v": ""},{"v": 0},{"v": 0}]}]
+           };
 
            angular.forEach(this.selectedPlayer.player.scoreHistory, function(item) {
                      data.rows.push({
@@ -80,10 +45,9 @@ PlayerService.service('PlayerService', function($resource, $http, $filter){
        };
         this.getAllPlayers = function(){
             console.log("get all Players");
-            if(playerList == null){
+
 
                 playerList = $resource('rest/players', {}, {query: {method:'GET', isArray:true}}).query();
-            }
 
             return playerList
         };

@@ -20,14 +20,25 @@
 
         </thead>
         <tbody>
+
         <tr ng-repeat="user in userList">
             <td>{{user.id}}</td>
             <td>{{user.name}}</td>
             <td>
-                <div ng-repeat="role in availableRoles">{{role}} - <input type="checkbox" ng-checked="containsRole(user.roles, role)" ng-click="toggleRole(user, role)"/> </div>
+               <div class="btn-group" bs-buttons-checkbox>
+
+                   <button type="button" class="btn" ng-model="user.roles.APPADMIN">APPADMIN</button>
+                   <button type="button" class="btn" ng-model="user.roles.SCOREADMIN">SCOREADMIN</button>
+                   <button type="button" class="btn" ng-model="user.roles.USER">USER</button>
+
+                </div>
+
             </td>
-
-
+            <td>
+                <div class="btn" save-roles saved-successfull="savedSuccessfull()">
+                               SAVE
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>

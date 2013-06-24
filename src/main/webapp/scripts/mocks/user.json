@@ -1,30 +1,38 @@
  [
      {  "id":1,
         "name":"ANM",
-        "roles":[
+        "roles":
+            {
+                "APPADMIN":true,
+                "SCOREADMIN":true,
+                "USER":true
+            }
 
-                "APPADMIN","SCOREADMIN","USER"
-
-
-        ]},
+        },
      {  "id":2,
          "name":"DIL",
-         "roles":[
-             "SCOREADMIN","USER"
+         "roles":
+             {
+                 "APPADMIN":false,
+                 "SCOREADMIN":true,
+                 "USER":true
+             }
 
-         ]},
+         },
      {  "id":3,
          "name":"FRM",
-         "roles":[
-             "USER"
-
-         ]},
+         "roles":{
+             "APPADMIN":false,
+             "SCOREADMIN":false,
+             "USER":true
+         }},
      {  "id":4,
          "name":"TIG",
-         "roles":[
-             "USER"
-
-         ]}
+         "roles":{
+             "APPADMIN":false,
+             "SCOREADMIN":false,
+             "USER":true
+         }}
 
 
     ]
