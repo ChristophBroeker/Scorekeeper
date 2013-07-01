@@ -40,7 +40,7 @@
                                SAVE
                 </div>
             </td>
-            <td><div class="icon-remove" ng-click="deleteUser(user.id)"></div> </td>
+            <td><div class="icon-remove" ng-click="deleteUser(user.id)" ng-show="user.name != 'admin'"></div> </td>
         </tr>
         </tbody>
     </table>
