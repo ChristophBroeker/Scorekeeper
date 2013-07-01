@@ -7,6 +7,7 @@
         <h5>neuen Benutzer hinzufügen</h5>
 
         <input class="span3" type="text" placeholder="Benutzername" ng-model="newUser">
+        <input class="span3" type="text" placeholder="first password" ng-model="newUserPassword" disabled="true">
 
         <button type="submit" class="btn">Ab dafür</button>
     </form>
@@ -16,7 +17,7 @@
         <th>id:</th>
         <th>Name:</th>
         <th colspan="2">Rollen:</th>
-
+        <th>löschen</th>
 
         </thead>
         <tbody>
@@ -35,10 +36,11 @@
 
             </td>
             <td>
-                <div class="btn" save-roles saved-successfull="savedSuccessfull()">
+                <div class="btn" ng-click="saveRoles(user)">
                                SAVE
                 </div>
             </td>
+            <td><div class="icon-remove" ng-click="deleteUser(user.id)"></div> </td>
         </tr>
         </tbody>
     </table>

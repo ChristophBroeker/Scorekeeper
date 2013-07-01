@@ -8,25 +8,26 @@
 
     <http use-expressions="true">
     
-    	<intercept-url method="GET" pattern="/rest/scoreboard" access="permitAll" />
-    	<intercept-url method="GET" pattern="/rest/user" access="permitAll" />
-        <intercept-url method="GET" pattern="/rest/**" access="isAuthenticated()" />
-        <intercept-url method="PUT" pattern="/rest/games" access="hasRole('SCOREADMIN')" />
-        <intercept-url method="PUT" pattern="/rest/players" access="hasRole('SCOREADMIN')" />
+<!--     	<intercept-url method="GET" pattern="/rest/scoreboard" access="permitAll" /> -->
+<!--     	<intercept-url method="GET" pattern="/rest/user/currentUser" access="permitAll" /> -->
+<!--         <intercept-url method="GET" pattern="/rest/**" access="isAuthenticated()" /> -->
+<!--         <intercept-url method="PUT" pattern="/rest/games" access="hasRole('SCOREADMIN')" /> -->
+<!--         <intercept-url method="PUT" pattern="/rest/players" access="hasRole('SCOREADMIN')" /> -->
         
         <form-login login-page="/index.html"/>
         <logout logout-url="/logout.html"/>
     </http>
 
+<beans:bean id="encoder" 
+    class="org.springframework.security.crypto.password.StandardPasswordEncoder"/>
+    
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-            <user name="super" password="super" authorities="APPADMIN, SCOREADMIN, USER" />
-                <user name="admin" password="admin" authorities="APPADMIN, USER" />
-                <user name="groomer" password="groomer" authorities="SCOREADMIN, USER" />
-                
-                <user name="user" password="user" authorities="USER" />
-            </user-service>
+        <authentication-provider user-service-ref="myUserDetailsService">
+         <password-encoder ref="encoder" />   
+
         </authentication-provider>
     </authentication-manager>
+    	<beans:bean id="myUserDetailsService"
+		class="com.github.scorekeeper.service.CostumUserDetailsService">
+	</beans:bean>
 </beans:beans>   

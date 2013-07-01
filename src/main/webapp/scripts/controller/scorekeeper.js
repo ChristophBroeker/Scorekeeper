@@ -35,33 +35,55 @@ ScoreKeeper.config(function ($routeProvider){
 
 
 
+
 ScoreKeeper.controller('ScoreKeeperCtrl',
-    ['$rootScope','$route', '$location','UserService',
-        function($rootScope, $route, $location, UserService) {
+    ['$scope','UserService', '$dialog',
+        function($scope, UserService, $dialog) {
 
-            $rootScope.user = UserService.getUser();
+             console.log("ScoreKeeperCtrl");
 
-            $rootScope.availableRoles = ["APPADMIN", "SCOREADMIN", "USER"];
+            $scope.firstLogin = function(){
+                var opts = {
+                    backdrop: true,
+                    keyboard: true,
+                    backdropClick: false,
+                    templateUrl:  'views/secure/newPassword.html',
+                    controller: 'NewPasswordCtrl'
 
-            $rootScope.hasRole = function(role) {
+                };
 
-                if ($rootScope.user === undefined) {
+                 $scope.pwDialog = $dialog.dialog(opts);
+                 $scope.pwDialog.open();
+
+            }
+
+            UserService.getCurrentUser($scope.firstLogin);
+            $scope.username = UserService.currentLogin.name;
+
+
+            $scope.availableRoles = ["APPADMIN", "SCOREADMIN", "USER"];
+
+            $scope.hasRole = function(role) {
+
+                if (UserService.currentLogin === undefined) {
                     return false;
                 }
-                if ($rootScope.user.roles === undefined) {
+                if (UserService.currentLogin.roles === undefined) {
                     return false;
                 }
-                if ($rootScope.user.roles[role] === undefined) {
+                if (UserService.currentLogin.roles[role] === undefined) {
                     return false;
                 }
 
-                return $rootScope.user.roles[role];
+                return UserService.currentLogin.roles[role];
             };
 
-            $rootScope.isLoggedIn = function(){
-                if ($rootScope.user === undefined || $rootScope.user.name === 'anonymous') {
+            $scope.isLoggedIn = function(){
+
+                if ( UserService.currentLogin === undefined || UserService.currentLogin.name === 'anonymous') {
                     return false;
                 }
+                $scope.username = UserService.currentLogin.name;
                 return true;
             };
 
@@ -70,6 +92,40 @@ ScoreKeeper.controller('ScoreKeeperCtrl',
 
         }
     ]);
+
+ScoreKeeper.controller('NewPasswordCtrl',
+    ['$scope', 'UserService', 'dialog',
+        function($scope, UserService, dialog) {
+             $scope.changePWSuccessful = false;
+             $scope.changePassword = function(){
+
+                 if($scope.pw1 != undefined && $scope.pw1.trim().length > 0)    {
+                     if($scope.pw1 == $scope.pw2){
+                         UserService.changeUsersPassword($scope.changeCallback,$scope.pw1);
+                     }else{
+                         $scope.message = "Die Passwoerter stimmen nicht ueberein!";
+                     }
+                 }else{
+                     $scope.message = "Bitte geben Sie ein gueltiges Passwort an!";
+                 }
+
+
+             };
+
+
+            $scope.changeCallback = function(successfull){
+                         console.log("successfully changed pw: "+successfull);
+                $scope.changePWSuccessful = successfull;
+                $scope.message = "Das Passwort wurde erfolgreich gespeichert";
+            };
+
+            $scope.closePopUp = function(){
+                dialog.close();
+            };
+        }
+    ]);
+
+
 ScoreKeeper.controller('NavCtrl',
     ['$scope','$route', '$location',
         function($scope, $route, $location) {
@@ -84,6 +140,9 @@ ScoreKeeper.controller('NavCtrl',
 ScoreKeeper.controller('LoginCtrl',
     ['$scope','$route','UserService',
         function($scope, $route, UserService) {
+
+
+
             $scope.loginFunction = function () {
                 UserService.login($scope.login, $scope.password);
 
@@ -224,11 +283,16 @@ ScoreKeeper.controller('AdminCtrl',
     ['$scope','$route', 'UserService',
         function($scope, $route, UserService) {
 
+            $scope.newUserPassword = "changeMe";
             $scope.addNewUser = function(){
-                   alert("add New User");
+                UserService.addNewUser($scope.newUser, $scope.newUserPassword);
+            };
+            $scope.deleteUser = function(userId){
+                UserService.deleteUser(userId);
             };
 
             $scope.saveRoles = function(user){
+                  UserService.updateUserRoles(user);
 
             };
 
@@ -244,18 +308,3 @@ ScoreKeeper.controller('AdminCtrl',
         }
     ]);
 
-ScoreKeeper.directive('saveRoles', function($http) {
-    return {
-        scope:{
-            callback: '&savedSuccessfull'
-        },
-        link: function (scope,element){
-            element.bind("mousedown", function(){
-
-                $('#picOne').fadeIn(1500).delay(3500).fadeOut(1500);
-                scope.callback();
-            })
-        }
-    }
-
-})

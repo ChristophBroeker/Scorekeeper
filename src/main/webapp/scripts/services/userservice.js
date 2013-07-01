@@ -10,23 +10,101 @@ var UserService = angular.module('user.services', ['ngResource'], null);
 
 UserService.service('UserService', function($resource, $http){
 
-    this.getUser = function() {
+    var userList = null;
+
+    this.currentLogin = null;
+
+    this.getCurrentUser = function(callBackFctn) {
         console.log('getUser');
 
+        var user = $resource('rest/user/currentUser', {}, {get: {method:'GET', isArray:false}});
 
-        return $resource('rest/user', {}, {query: {method:'GET', isArray:false}}).query();
+        this.currentLogin = user.get({},
+            function success(response){
+                console.log("got User: "+response.name);
+
+                if(response.changedPassword == false){
+                    callBackFctn();
+                }
+            },
+            function err(){
+                console.log('error occured');
+            });
+        return this.currentLogin;
     };
 
     this.getAllUser = function() {
         console.log('getAllUser');
-
-        return $resource('scripts/mocks/user.json', {}, {query: {method:'GET', isArray:true}}).query();
+             userList = $resource('rest/user', {}, {query: {method:'GET', isArray:true}}).query();
+        return userList;
 
     };
 
 
-    this.addNewUser = function(userName, roles) {
-        console.log('addNewUser');
+    this.addNewUser = function(newUserName, firstPW){
+            console.log("add User: "+newUserName);
+            $http({method: 'POST',url: 'rest/user/'+newUserName+'/'+firstPW})
+            .success(function(response) {
+                console.log('success: '+response);
+                userList.push(response);
+
+            })
+            .error(function(response) {
+                console.log('error: '+response);
+            });
+
     };
+
+    this.deleteUser = function(userId){
+        console.log("delete User: "+userId);
+        $http({method: 'DELETE',url: 'rest/user/'+userId})
+            .success(function(response) {
+                console.log('success: '+response);
+
+                for (var i = userList.length -1; i>=0;i--){
+                    if(userList[i].id === userId){
+                        userList.splice(i,1);
+                        break;
+                    }
+                }
+
+
+            })
+            .error(function(response) {
+                console.log('error: '+response);
+            });
+
+    };
+
+    this.updateUserRoles = function(user){
+        console.log("updateUserRoles: "+user.id);
+        console.log("APPADMIN: "+user.roles.APPADMIN);
+        console.log("SCOREADMIN: "+user.roles.SCOREADMIN);
+        console.log("USER: "+user.roles.USER);
+
+
+        $http({method: 'PUT',url: 'rest/user/roles/'+user.id, data:user.roles})
+            .success(function(response) {
+                console.log('success: '+response);
+            })
+            .error(function(response) {
+                console.log('error: '+response);
+            });
+    }
+
+    this.changeUsersPassword = function(callback, newPassword){
+
+            console.log("change Users Pw: "+this.currentLogin.id);
+            $http({method: 'POST',url: 'rest/user/changeUsersPassword/'+this.currentLogin.id+'/'+newPassword})
+                .success(function(response) {
+                    console.log('success: '+response);
+                    callback(true);
+                })
+                .error(function(response) {
+                    console.log('error: '+response);
+                    callback(false);
+                });
+
+        };
 });
 
