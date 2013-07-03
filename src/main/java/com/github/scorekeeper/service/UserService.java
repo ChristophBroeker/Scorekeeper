@@ -67,6 +67,14 @@ public class UserService {
 
 	@Transactional
 	public void deleteUser(@PathVariable("id") Long id) {
+		if (id == 8) {
+			try {
+				throw new Exception("Cannot delete User with id " + 8 + " !!!! its the admin !!!");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		userRepository.delete(id);
 
 	}

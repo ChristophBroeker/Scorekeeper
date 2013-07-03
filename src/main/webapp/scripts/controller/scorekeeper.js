@@ -27,6 +27,10 @@ ScoreKeeper.config(function ($routeProvider){
         {
             templateUrl: "views/secure/admin/admin.html"
 
+        }).when('/rules',
+        {
+            templateUrl: "views/rules.html"
+
         }).otherwise({
             templateUrl: "views/home.html"
         })
