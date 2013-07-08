@@ -4,32 +4,32 @@
 
 
     <form class="form-inline" ng-submit="addNewPlayer()" ng-show="hasRole('SCOREADMIN')">
-        <h5>neuen Spieler hinzufügen</h5>
+        <h5>{{ 'view.player.newplayer.title' | i18n }}</h5>
 
-        <input class="span3" type="text" placeholder="Spielername" ng-model="newPlayer">
+        <input class="span3" type="text" placeholder="{{ 'view.player.newplayer.input.placeholder' | i18n }}" ng-model="newPlayer">
 
-        <button type="submit" class="btn">Ab dafür</button>
+        <button type="submit" class="btn">{{ 'view.player.newplayer.button' | i18n }}</button>
     </form>
 
     <table class="table">
         <thead>
-        <th>id:</th>
-        <th>Name:</th>
-        <th>captured:</th>
-        <th>mean:</th>
-        <th colspan="2">standardDeviation:</th>
-        <th ng-show="hasRole('SCOREADMIN')">löschen:</th>
+        <th>{{ 'view.player.list.col1' | i18n }}</th>
+        <th>{{ 'view.player.list.col2' | i18n }}</th>
+
+        <th>{{ 'view.player.list.col3' | i18n }}</th>
+        <th colspan="2">{{ 'view.player.list.col4' | i18n }}</th>
+        <th ng-show="hasRole('SCOREADMIN')">{{ 'view.player.list.col5' | i18n }}</th>
 
         </thead>
         <tbody>
         <tr ng-repeat="player in players">
             <td>{{player.id}}</td>
             <td>{{player.name}}</td>
-            <td>{{player.currentScore.captured}}</td>
+
             <td>{{player.currentScore.mean}}</td>
-            <td>{{player.currentScore.standardDeviation}}</td>
+            <td>+/- {{player.currentScore.standardDeviation}}</td>
             <td><img src="assets/img/line-chart.png" ng-click="openPlayerChart(player)"></td>
-            <td ng-show="hasRole('SCOREADMIN')"><button ng-click="removePlayer(player.id)" ng-disabled="player.currentScore.mean > 0">löschen</button></td>
+            <td ng-show="hasRole('SCOREADMIN')"><button ng-click="removePlayer(player.id)" ng-disabled="player.currentScore.mean > 0">{{ 'view.player.list.button.delete' | i18n }}</button></td>
         </tr>
         </tbody>
     </table>

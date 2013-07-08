@@ -3,34 +3,41 @@
 
 
 
-          <h3>Regeln</h3>
-    <h4>Allgemein</h4>
+          <h3>{{ 'view.rules.header' | i18n }}</h3>
+    <h4>{{ 'view.rules.general.header' | i18n }}</h4>
     <ul>
-        <li><b>Gespielt werden 2 Gewinnsätze</b></b><br>Ausnahmen können vor dem Spiel besprochen werden</li>
-        <li><b>Ein Gewinnsatz geht bis 10</b></li>
-        <li><b>Es gilt "make  it -> take it"</b></br>Also, wer den Punkt macht hat Einwurf</li>
-        <li><b>Das Kurbeln ist verboten!</b></br> Die Figur bzw die Stange dürfen sich maximal um 360 Grad drehen.</li>
-        <li><b>Bälle die ins Tor gehen und dann wieder zurück auf die Spielfläche springen, zählen als Tor</b></li>
-        <li><b>Springt der Ball aus dem Spielfeld raus,</b></br> wird er dort eingeworfen, wo er herausgesprungen ist.</li>
+        <li><b>{{ 'view.rules.general.li1.header' | i18n }}</b>
+            <br>{{ 'view.rules.general.li1.subtext' | i18n }}</li>
+        <li><b>{{ 'view.rules.general.li2.header' | i18n }}</b></li>
+        <li><b>{{ 'view.rules.general.li3.header' | i18n }}</b>
+            </br>{{ 'view.rules.general.li3.subtext' | i18n }}</li>
+        <li><b>{{ 'view.rules.general.li4.header' | i18n }}</b>
+            </br> {{ 'view.rules.general.li4.subtext' | i18n }}</li>
+        <li><b>{{ 'view.rules.general.li5.header' | i18n }}</b></li>
+        <li><b>{{ 'view.rules.general.li6.header' | i18n }}</b>
+            </br>{{ 'view.rules.general.li6.subtext' | i18n }}</li>
     </ul>
 
-    <h4>2 vs 2</h4>
+    <h4>{{ 'view.rules.2v2.header' | i18n }}</h4>
 
-    <p>Im Spiel <b>2 gegen 2</b> gilt zusätzlich:</p>
+    <p>{{ 'view.rules.2v2.subheader' | i18n }}</p>
 
     <ul>
-        <li><b>Mittelfeldtore zählen nicht</b><br/>
+        <li><b>{{ 'view.rules.2v2.li1.header' | i18n }}</b><br/>
 
-            Ein Mittelfeldtor ist, ein Tor, bei dem ein gegnerischer Mittelfeldspieler den Ball zuletzt beschleunigt hat.
-            <p>Somit sind <ul><li>Abpraller (geblockte Angriffe, sofern sie ohne Beschleunigung geschehen)</li>
-                <li>Abfälscher</li>
-            <li>Eigentore</li></ul>
-            keine Mittelfeldtore und werden somit normal gezählt.</p>
-         Im Falle eines Mittelfeldtores, bekommt der Abwehrspieler des Teams auf dessen Seite das Tor gefallen ist, den Ball.
+            {{ 'view.rules.2v2.li1.subtext' | i18n }}
+            <p>{{ 'view.rules.2v2.li1.ul.header' | i18n }}
+                <ul>
+                    <li>{{ 'view.rules.2v2.li1.li1' | i18n }}</li>
+                    <li>{{ 'view.rules.2v2.li1.li2' | i18n }}</li>
+                    <li>{{ 'view.rules.2v2.li1.li3' | i18n }}</li>
+            </ul>
+            {{ 'view.rules.2v2.li1.ul.footer' | i18n }}</p>
+            {{ 'view.rules.2v2.li1.footer' | i18n }}
         </li>
     </ul>
 
-     <h5>Mehr fällt mir gerade nicht ein... Wenn Euch noch etwas einfällt, gerne an mich!</h5>
+     <h5>{{ 'view.rules.footer' | i18n }}</h5>
 
 
 </div>

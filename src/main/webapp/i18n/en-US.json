@@ -1,0 +1,98 @@
+{
+    "yes": "Yes",
+    "no": "No",
+
+
+    "navbar.link.home": "SCOREKEEPER",
+    "navbar.link.board": "Board",
+    "navbar.link.games": "Games",
+    "navbar.link.player": "Player",
+    "navbar.link.admin": "Administration",
+    "navbar.link.rules": "Rules",
+    "navbar.login.login": "Username",
+    "navbar.login.password": "Password",
+    "navbar.login.button": "Login",
+
+    "navbar.login.loggedin.message": "Hi {0}",
+
+    "view.board.table.title.col1": "Ranking:",
+    "view.board.table.title.col2": "Name:",
+    "view.board.table.title.col3": "Strength:",
+    "view.board.table.title.col4": "Games:",
+    "view.board.table.title.col5": "won:",
+    "view.board.table.title.col6": "lost:",
+
+    "view.games.newgame.title": "add new Game:",
+    "view.games.newgame.tap1.placeholder": "Team A Pl. 1",
+    "view.games.newgame.tap2.placeholder": "Team A Pl. 2",
+    "view.games.newgame.tbp1.placeholder": "Team B Pl. 1",
+    "view.games.newgame.tbp2.placeholder": "Team B Pl. 2",
+    "view.games.newgame.button": "Go",
+    "view.games.filter.placeholder": "filter by players name",
+
+    "view.games.table.colta": "Team A",
+    "view.games.table.coltb": "Team B",
+
+    "view.games.table.col1": "Date:",
+    "view.games.table.col2": "Player 1:",
+    "view.games.table.col3": "Player 2:",
+    "view.games.table.col4": "Player 1:",
+    "view.games.table.col5": "Player 2:",
+    "view.games.table.col6": "Result",
+    "view.games.paging.current": "Page: {0}",
+    "view.games.paging.button.previous": "Previous page",
+    "view.games.paging.button.next": "Next page",
+
+    "view.player.newplayer.title": "add new Player",
+    "view.player.newplayer.input.placeholder": "Players name",
+    "view.player.newplayer.button": "Go",
+    "view.player.list.col1": "id",
+    "view.player.list.col2": "Name:",
+    "view.player.list.col3": "current Score",
+    "view.player.list.col4": "deviation",
+    "view.player.list.col5": "delete",
+    "view.player.list.button.delete": "delete",
+
+    "view.admin.newuser.title": "add new user",
+    "view.admin.newuser.username.input": "Username",
+    "view.admin.newuser.button": "Go",
+
+    "view.admin.list.col1": "Id:",
+    "view.admin.list.col2": "Name:",
+    "view.admin.list.col3": "Roles:",
+    "view.admin.list.col4": "delete:",
+    "view.admin.list.button.save": "save",
+
+    "view.admin.role.appadmin": "Administrator",
+    "view.admin.role.scoreadmin": "Game-Admin",
+    "view.admin.role.user": "User",
+
+
+    "view.rules.header": "Rules",
+    "view.rules.general.header": "General",
+    "view.rules.general.li1.header": "Gespielt werden 2 Gewinnsätze",
+    "view.rules.general.li1.subtext": "Ausnahmen können vor dem Spiel besprochen werden",
+    "view.rules.general.li2.header": "Ein Gewinnsatz geht bis 10",
+
+    "view.rules.general.li3.header": "Es gilt 'make it -> take it'",
+    "view.rules.general.li3.subtext": "Also, wer den Punkt macht, hat Einwurf",
+    "view.rules.general.li4.header": "Das Kurbeln ist verboten!",
+    "view.rules.general.li4.subtext": "Die Figur bzw die Stange dürfen sich maximal um 360 Grad drehen.",
+    "view.rules.general.li5.header": "Bälle die ins Tor gehen und dann wieder zurück auf die Spielfläche springen, zählen als Tor",
+
+    "view.rules.general.li6.header": "Springt der Ball aus dem Spielfeld raus,",
+    "view.rules.general.li6.subtext": "wird er dort eingeworfen, wo er herausgesprungen ist.",
+
+    "view.rules.2v2.header": "2 gegen 2",
+    "view.rules.2v2.subheader": "Im Spiel '2 gegen 2' gilt zusätzlich:",
+    "view.rules.2v2.li1.header": "Mittelfeldtore zählen nicht",
+    "view.rules.2v2.li1.subtext": "Ein Mittelfeldtor ist, ein Tor, bei dem ein gegnerischer Mittelfeldspieler den Ball zuletzt beschleunigt hat.",
+    "view.rules.2v2.li1.ul.header": "Somit sind",
+    "view.rules.2v2.li1.li1": "Abpraller (geblockte Angriffe, sofern sie ohne Beschleunigung geschehen)",
+    "view.rules.2v2.li1.li2": "Abfälscher",
+    "view.rules.2v2.li1.li3": "Eigentore",
+    "view.rules.2v2.li1.ul.footer": "keine Mittelfeldtore und werden somit normal gezählt.",
+    "view.rules.2v2.li1.footer": "Im Falle eines Mittelfeldtores, bekommt der Abwehrspieler des Teams auf dessen Seite das Tor gefallen ist, den Ball.",
+    "view.rules.footer": "Mehr fällt mir gerade nicht ein... Wenn Euch noch etwas einfällt, gerne an mich!"
+
+}

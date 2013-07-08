@@ -4,20 +4,20 @@
 
 
     <form class="form-inline" ng-submit="addNewUser()" ng-show="hasRole('APPADMIN')">
-        <h5>neuen Benutzer hinzufügen</h5>
+        <h5>{{ 'view.admin.newuser.title' | i18n }}</h5>
 
-        <input class="span3" type="text" placeholder="Benutzername" ng-model="newUser">
+        <input class="span3" type="text" placeholder="{{ 'view.admin.newuser.username.input' | i18n }}" ng-model="newUser">
         <input class="span3" type="text" placeholder="first password" ng-model="newUserPassword" disabled="true">
 
-        <button type="submit" class="btn">Ab dafür</button>
+        <button type="submit" class="btn">{{ 'view.admin.newuser.button' | i18n }}</button>
     </form>
 
     <table class="table">
         <thead>
-        <th>id:</th>
-        <th>Name:</th>
-        <th colspan="2">Rollen:</th>
-        <th>löschen</th>
+        <th>{{ 'view.admin.list.col1' | i18n }}</th>
+        <th>{{ 'view.admin.list.col2' | i18n }}</th>
+        <th colspan="2">{{ 'view.admin.list.col3' | i18n }}</th>
+        <th>{{ 'view.admin.list.col4' | i18n }}</th>
 
         </thead>
         <tbody>
@@ -28,16 +28,16 @@
             <td>
                <div class="btn-group" bs-buttons-checkbox>
 
-                   <button type="button" class="btn" ng-model="user.roles.APPADMIN">APPADMIN</button>
-                   <button type="button" class="btn" ng-model="user.roles.SCOREADMIN">SCOREADMIN</button>
-                   <button type="button" class="btn" ng-model="user.roles.USER">USER</button>
+                   <button type="button" class="btn" ng-model="user.roles.APPADMIN">{{ 'view.admin.role.appadmin'|i18n }}</button>
+                   <button type="button" class="btn" ng-model="user.roles.SCOREADMIN">{{ 'view.admin.role.scoreadmin'|i18n }}</button>
+                   <button type="button" class="btn" ng-model="user.roles.USER">{{ 'view.admin.role.user'|i18n }}</button>
 
                 </div>
 
             </td>
             <td>
                 <div class="btn" ng-click="saveRoles(user)">
-                               SAVE
+                    {{ 'view.admin.list.button.save' | i18n }}
                 </div>
             </td>
             <td><div class="icon-remove" ng-click="deleteUser(user.id)" ng-show="user.name != 'admin'"></div> </td>

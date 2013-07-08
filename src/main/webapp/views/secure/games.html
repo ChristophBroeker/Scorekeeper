@@ -1,28 +1,28 @@
 
 <div class="container" ng-controller="GamesCtrl">
     <form class="form-inline" ng-submit="addNewGame()" ng-show="hasRole('SCOREADMIN')">
-        <h5>neues Spiel eintragen</h5>
+        <h5>{{ 'view.games.newgame.title' | i18n }}</h5>
         <select class="span2" ng-model="newGame.teamA[0]">
-            <option value="">Team A Pl. 1</option>
+            <option value="">{{ 'view.games.newgame.tap1.placeholder' | i18n }}</option>
             <option ng-repeat="player in playerNames" value="{{player.id}}">{{player.name}}</option>
         </select>
         <select class="span2" ng-model="newGame.teamA[1]">
-            <option value="">Team A Pl. 2</option>
+            <option value="">{{ 'view.games.newgame.tap2.placeholder' | i18n }}</option>
             <option ng-repeat="player in playerNames" value="{{player.id}}">{{player.name}}</option>
         </select>
-        <input class="span1" type="text" placeholder="Punkte" ng-model="newGame.teamAScore">
+        <input class="span1" type="text" ng-model="newGame.teamAScore">
         <br/>
         <br/>
         <select class="span2" ng-model="newGame.teamB[0]">
-            <option value="">Team B Pl. 1</option>
+            <option value="">{{ 'view.games.newgame.tbp1.placeholder' | i18n }}</option>
             <option ng-repeat="player in playerNames" value="{{player.id}}">{{player.name}}</option>
         </select>
         <select class="span2" ng-model="newGame.teamB[1]">
-            <option value="">Team B Pl. 2</option>
+            <option value="">{{ 'view.games.newgame.tbp2.placeholder' | i18n }}</option>
             <option ng-repeat="player in playerNames" value="{{player.id}}">{{player.name}}</option>
         </select>
-        <input class="span1" type="text" placeholder="Punkte" ng-model="newGame.teamBScore">
-        <button type="submit" class="btn">Ab dafür</button>
+        <input class="span1" type="text" ng-model="newGame.teamBScore">
+        <button type="submit" class="btn">{{ 'view.games.newgame.button' | i18n }}</button>
     </form>
 
     <style>
@@ -36,12 +36,12 @@
         }
 
     </style>
-    <input type="text" ng-model="searchText" placeholder="nach Spieler filtern"/>
+    <input type="text" ng-model="searchText" placeholder="{{ 'view.games.filter.placeholder' | i18n }}"/>
     <table class="table">
         <thead>
             <th>&nbsp;</th>
-            <th colspan="2">Team A</th>
-            <th colspan="2">Team B</th>
+            <th colspan="2">{{ 'view.games.table.colta' | i18n }}</th>
+            <th colspan="2">{{ 'view.games.table.coltb' | i18n }}</th>
 
             <th>&nbsp;</th>
             <th>&nbsp;</th>
@@ -49,13 +49,12 @@
 
         </thead>
         <thead>
-            <th>Datum:</th>
-            <th>Spieler1:</th>
-            <th>Spieler2:</th>
-
-            <th>Spieler1:</th>
-            <th>Spieler2:</th>
-            <th>Ergebnis:</th>
+            <th>{{ 'view.games.table.col1' | i18n }}</th>
+            <th>{{ 'view.games.table.col2' | i18n }}</th>
+            <th>{{ 'view.games.table.col3' | i18n }}</th>
+            <th>{{ 'view.games.table.col4' | i18n }}</th>
+            <th>{{ 'view.games.table.col5' | i18n }}</th>
+            <th>{{ 'view.games.table.col6' | i18n }}</th>
 
         </thead>
         <tbody>
@@ -75,7 +74,7 @@
     </table>
     <form  class="row form-inline">
 
-            <div>Seite: {{currentListPage + 1}}</div>
+            <div>{{ 'view.games.paging.current' | i18n:[currentListPage + 1] }}</div>
 
 
                 <select class="span2" ng-model="itemsPerPage" ng-change="showMoreItems()">
@@ -88,8 +87,8 @@
                     <option value="1000">1000</option>
 
                 </select>
-                 <a class="btn btn-primary" ng-click="derateListPage()">Previous</a>
-                 <a class="btn btn-primary" ng-click="raiseListPage()">Next</a>
+                 <a class="btn btn-primary" ng-click="derateListPage()">{{ 'view.games.paging.button.previous' | i18n }}</a>
+                 <a class="btn btn-primary" ng-click="raiseListPage()">{{ 'view.games.paging.button.next' | i18n }}</a>
 
 
     </form>

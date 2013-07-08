@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var ScoreKeeper = angular.module('scorekeeper', ['player.services', 'game.services', 'user.services', 'ui.bootstrap', '$strap.directives'], null);
+var ScoreKeeper = angular.module('scorekeeper', ['player.services', 'game.services', 'user.services', 'ui.bootstrap', '$strap.directives', 'skI18n'], null);
 ScoreKeeper.config(function ($routeProvider){
     $routeProvider
         .when('/board',
@@ -41,11 +41,14 @@ ScoreKeeper.config(function ($routeProvider){
 
 
 ScoreKeeper.controller('ScoreKeeperCtrl',
-    ['$scope','UserService', '$dialog',
-        function($scope, UserService, $dialog) {
+    ['$scope','UserService', '$dialog', 'I18n', '$window',
+        function($scope, UserService, $dialog, I18n, $window) {
 
-             console.log("ScoreKeeperCtrl");
 
+            var language = $window.navigator.userLanguage || $window.navigator.language;
+             console.log("ScoreKeeperCtrl --- "+language);
+
+            I18n.loadDictionary(language);
             $scope.firstLogin = function(){
                 var opts = {
                     backdrop: true,
