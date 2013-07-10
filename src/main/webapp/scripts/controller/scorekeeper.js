@@ -6,13 +6,15 @@
  * To change this template use File | Settings | File Templates.
  */
 
+
+
 var ScoreKeeper = angular.module('scorekeeper', ['player.services', 'game.services', 'user.services', 'ui.bootstrap', '$strap.directives', 'skI18n'], null);
-ScoreKeeper.config(function ($routeProvider){
+ScoreKeeper.config(function ($routeProvider) {
     $routeProvider
         .when('/board',
         {
-           templateUrl: "views/board.html",
-           controller: "BoardCtrl"
+            templateUrl: "views/board.html",
+            controller: "BoardCtrl"
 
 
         }).when('/player',
@@ -37,30 +39,27 @@ ScoreKeeper.config(function ($routeProvider){
 });
 
 
-
-
-
 ScoreKeeper.controller('ScoreKeeperCtrl',
-    ['$scope','UserService', '$dialog', 'I18n', '$window',
-        function($scope, UserService, $dialog, I18n, $window) {
+    ['$scope', 'UserService', '$dialog', 'I18n', '$window',
+        function ($scope, UserService, $dialog, I18n, $window) {
 
 
             var language = $window.navigator.userLanguage || $window.navigator.language;
-             console.log("ScoreKeeperCtrl --- "+language);
+            console.log("ScoreKeeperCtrl --- " + language);
 
             I18n.loadDictionary(language);
-            $scope.firstLogin = function(){
+            $scope.firstLogin = function () {
                 var opts = {
                     backdrop: true,
                     keyboard: true,
                     backdropClick: false,
-                    templateUrl:  'views/secure/newPassword.html',
+                    templateUrl: 'views/secure/newPassword.html',
                     controller: 'NewPasswordCtrl'
 
                 };
 
-                 $scope.pwDialog = $dialog.dialog(opts);
-                 $scope.pwDialog.open();
+                $scope.pwDialog = $dialog.dialog(opts);
+                $scope.pwDialog.open();
 
             }
 
@@ -70,7 +69,7 @@ ScoreKeeper.controller('ScoreKeeperCtrl',
 
             $scope.availableRoles = ["APPADMIN", "SCOREADMIN", "USER"];
 
-            $scope.hasRole = function(role) {
+            $scope.hasRole = function (role) {
 
                 if (UserService.currentLogin === undefined) {
                     return false;
@@ -85,9 +84,9 @@ ScoreKeeper.controller('ScoreKeeperCtrl',
                 return UserService.currentLogin.roles[role];
             };
 
-            $scope.isLoggedIn = function(){
+            $scope.isLoggedIn = function () {
 
-                if ( UserService.currentLogin === undefined || UserService.currentLogin.name === 'anonymous') {
+                if (UserService.currentLogin === undefined || UserService.currentLogin.name === 'anonymous') {
                     return false;
                 }
                 $scope.username = UserService.currentLogin.name;
@@ -95,38 +94,36 @@ ScoreKeeper.controller('ScoreKeeperCtrl',
             };
 
 
-
-
         }
     ]);
 
 ScoreKeeper.controller('NewPasswordCtrl',
     ['$scope', 'UserService', 'dialog',
-        function($scope, UserService, dialog) {
-             $scope.changePWSuccessful = false;
-             $scope.changePassword = function(){
+        function ($scope, UserService, dialog) {
+            $scope.changePWSuccessful = false;
+            $scope.changePassword = function () {
 
-                 if($scope.pw1 != undefined && $scope.pw1.trim().length > 0)    {
-                     if($scope.pw1 == $scope.pw2){
-                         UserService.changeUsersPassword($scope.changeCallback,$scope.pw1);
-                     }else{
-                         $scope.message = "Die Passwoerter stimmen nicht ueberein!";
-                     }
-                 }else{
-                     $scope.message = "Bitte geben Sie ein gueltiges Passwort an!";
-                 }
-
-
-             };
+                if ($scope.pw1 != undefined && $scope.pw1.trim().length > 0) {
+                    if ($scope.pw1 == $scope.pw2) {
+                        UserService.changeUsersPassword($scope.changeCallback, $scope.pw1);
+                    } else {
+                        $scope.message = "Die Passwoerter stimmen nicht ueberein!";
+                    }
+                } else {
+                    $scope.message = "Bitte geben Sie ein gueltiges Passwort an!";
+                }
 
 
-            $scope.changeCallback = function(successfull){
-                         console.log("successfully changed pw: "+successfull);
+            };
+
+
+            $scope.changeCallback = function (successfull) {
+                console.log("successfully changed pw: " + successfull);
                 $scope.changePWSuccessful = successfull;
                 $scope.message = "Das Passwort wurde erfolgreich gespeichert";
             };
 
-            $scope.closePopUp = function(){
+            $scope.closePopUp = function () {
                 dialog.close();
             };
         }
@@ -134,8 +131,8 @@ ScoreKeeper.controller('NewPasswordCtrl',
 
 
 ScoreKeeper.controller('NavCtrl',
-    ['$scope','$route', '$location',
-        function($scope, $route, $location) {
+    ['$scope', '$route', '$location',
+        function ($scope, $route, $location) {
             $scope.navClass = function (page) {
 
                 var currentRoute = $location.path().substring(1) || 'home';
@@ -145,9 +142,8 @@ ScoreKeeper.controller('NavCtrl',
     ]);
 
 ScoreKeeper.controller('LoginCtrl',
-    ['$scope','$route','UserService',
-        function($scope, $route, UserService) {
-
+    ['$scope', '$route', 'UserService',
+        function ($scope, $route, UserService) {
 
 
             $scope.loginFunction = function () {
@@ -158,57 +154,55 @@ ScoreKeeper.controller('LoginCtrl',
     ]);
 
 
-
-
 ScoreKeeper.controller('BoardCtrl',
-    ['$scope','$route', 'GameService',
-        function($scope, $route, GameService) {
-         $scope.board = GameService.getScoreTable();
+    ['$scope', '$route', 'GameService',
+        function ($scope, $route, GameService) {
+            $scope.board = GameService.getScoreTable();
 
 
         }
     ]);
 
 ScoreKeeper.controller('GamesCtrl',
-    ['$scope','$route', 'PlayerService', 'GameService',
-        function($scope, $route, PlayerService, GameService) {
+    ['$scope', '$route', 'PlayerService', 'GameService',
+        function ($scope, $route, PlayerService, GameService) {
             $scope.playerNames = PlayerService.getAllPlayers();
 
             $scope.itemsPerPage = 10;
             $scope.currentListPage = 0;
             $scope.games = GameService.getAllGames($scope.itemsPerPage, $scope.currentListPage);
-            var game = {"teamA":[],
-                "teamB":[],
-                "teamAScore":0,
-                "teamBScore":0,
-                "result":"WIN_A"
+            var game = {"teamA": [],
+                "teamB": [],
+                "teamAScore": 0,
+                "teamBScore": 0,
+                "result": "WIN_A"
             }
 
             $scope.newGame = game;
-            $scope.showMoreItems = function(){
+            $scope.showMoreItems = function () {
                 $scope.currentListPage = 0;
-                $scope.games =GameService.getAllGames($scope.itemsPerPage,$scope.currentListPage);
+                $scope.games = GameService.getAllGames($scope.itemsPerPage, $scope.currentListPage);
             };
-            $scope.raiseListPage = function(){
-                 if($scope.games.length == $scope.itemsPerPage){
-                     $scope.currentListPage = $scope.currentListPage + 1;
-                     $scope.games =GameService.getAllGames($scope.itemsPerPage,$scope.currentListPage);
-                 }
-
-            };
-            $scope.derateListPage = function(){
-                if($scope.currentListPage > 0){
-                    $scope.currentListPage = $scope.currentListPage - 1;
-                    $scope.games =GameService.getAllGames($scope.itemsPerPage,$scope.currentListPage);
+            $scope.raiseListPage = function () {
+                if ($scope.games.length == $scope.itemsPerPage) {
+                    $scope.currentListPage = $scope.currentListPage + 1;
+                    $scope.games = GameService.getAllGames($scope.itemsPerPage, $scope.currentListPage);
                 }
 
             };
-            $scope.addNewGame = function(){
-                if(game.teamAScore > game.teamBScore){
+            $scope.derateListPage = function () {
+                if ($scope.currentListPage > 0) {
+                    $scope.currentListPage = $scope.currentListPage - 1;
+                    $scope.games = GameService.getAllGames($scope.itemsPerPage, $scope.currentListPage);
+                }
+
+            };
+            $scope.addNewGame = function () {
+                if (game.teamAScore > game.teamBScore) {
                     game.result = "WIN_A";
-                }else if(game.teamAScore < game.teamBScore){
+                } else if (game.teamAScore < game.teamBScore) {
                     game.result = "WIN_B";
-                }else{
+                } else {
                     game.result = "DRAW";
                 }
                 GameService.addNewGame(game);
@@ -219,45 +213,44 @@ ScoreKeeper.controller('GamesCtrl',
     ]);
 
 ScoreKeeper.controller('PlayerCtrl',
-    ['$scope','$route','$dialog', 'PlayerService',
-        function($scope, $route, $dialog, PlayerService) {
-         $scope.players = PlayerService.getAllPlayers();
+    ['$scope', '$route', '$dialog', 'PlayerService',
+        function ($scope, $route, $dialog, PlayerService) {
+            $scope.players = PlayerService.getAllPlayers();
 
-         $scope.addNewPlayer = function(){
-             console.log('CTRL - addNewPlayer');
-             var playerName = $scope.newPlayer;
+            $scope.addNewPlayer = function () {
+                console.log('CTRL - addNewPlayer');
+                var playerName = $scope.newPlayer;
 
-             PlayerService.addNewPlayer(playerName);
-         };
+                PlayerService.addNewPlayer(playerName);
+            };
 
-         $scope.removePlayer = function(playerId){
-             console.log("removePlayer: "+playerId);
-             PlayerService.removePlayer(playerId);
-          };
-
+            $scope.removePlayer = function (playerId) {
+                console.log("removePlayer: " + playerId);
+                PlayerService.removePlayer(playerId);
+            };
 
 
             $scope.opts = {
                 backdrop: true,
                 keyboard: true,
                 backdropClick: true,
-                templateUrl:  'views/secure/playerchart.html', // OR: templateUrl: 'path/to/view.html',
+                templateUrl: 'views/secure/playerchart.html', // OR: templateUrl: 'path/to/view.html',
                 controller: 'PlayerChartCtrl'
             };
-         $scope.openPlayerChart = function(player){
-            PlayerService.selectedPlayer.player = player;
-            console.log('player: '+player);
-            var d = $dialog.dialog($scope.opts);
-            d.open()
-         };
+            $scope.openPlayerChart = function (player) {
+                PlayerService.selectedPlayer.player = player;
+                console.log('player: ' + player);
+                var d = $dialog.dialog($scope.opts);
+                d.open()
+            };
         }
     ]);
 
 ScoreKeeper.controller('PlayerChartCtrl',
-    ['$scope','$route','PlayerService',
-        function($scope, $route, PlayerService) {
+    ['$scope', '$route', 'PlayerService',
+        function ($scope, $route, PlayerService) {
 
-            $scope.player =  PlayerService.selectedPlayer.player;
+            $scope.player = PlayerService.selectedPlayer.player;
 
 
             $scope.chart = {
@@ -266,7 +259,7 @@ ScoreKeeper.controller('PlayerChartCtrl',
                 "cssStyle": "height:400px; width:500;",
                 "data": PlayerService.getHistoryForChart(),
                 "options": {
-                    "title": "Chart fuer "+$scope.player.name,
+                    "title": "Chart fuer " + $scope.player.name,
                     "isStacked": "false",
                     "fill": 20,
                     "displayExactValues": true,
@@ -287,30 +280,42 @@ ScoreKeeper.controller('PlayerChartCtrl',
     ]);
 
 ScoreKeeper.controller('AdminCtrl',
-    ['$scope','$route', 'UserService',
-        function($scope, $route, UserService) {
+    ['$scope', '$route', 'UserService',
+        function ($scope, $route, UserService) {
 
             $scope.newUserPassword = "changeMe";
-            $scope.addNewUser = function(){
+            $scope.addNewUser = function () {
                 UserService.addNewUser($scope.newUser, $scope.newUserPassword);
             };
-            $scope.deleteUser = function(userId){
+            $scope.deleteUser = function (userId) {
                 UserService.deleteUser(userId);
             };
 
-            $scope.saveRoles = function(user){
-                  UserService.updateUserRoles(user);
+            $scope.saveRoles = function (user) {
+                UserService.updateUserRoles(user);
 
             };
 
-            $scope.savedSuccessfull = function(){
+            $scope.savedSuccessfull = function () {
                 console.log('do savedSuccessfull')
             };
 
 
+            $scope.userList = UserService.getAllUser();
 
+        }
+    ]);
 
-            $scope.userList =  UserService.getAllUser();
+ScoreKeeper.controller('HomeCtrl',
+    ['$scope', 'GameService',
+        function ($scope, GameService) {
+
+            GameService.getCurrentGamePlan();
+
+            $scope.currentPlan = GameService.currentPlan;
+            $scope.startNewPlan = function () {
+                GameService.createNewGamePlan();
+            }
 
         }
     ]);

@@ -88,6 +88,9 @@ PlayerService.service('PlayerService', function($resource, $http, $filter){
 
 
        this.getPlayer = function(playerId){
+            if(playerList == null){
+              this.getAllPlayers();
+            }
 
            for (var i = playerList.length -1; i>=0;i--){
                if(playerList[i].id == playerId){

@@ -41,5 +41,16 @@ GameService.service('GameService', function($resource, $http){
     this.getScoreTable = function(){
         return  $resource('rest/scoreboard', {}, {query: {method:'GET', isArray:true}}).query();
     };
+
+    this.currentPlan = {};
+    this.getCurrentGamePlan = function(){
+        this.currentPlan = $resource('rest/games/suggested', {}, {query: {method:'GET', isArray:true}}).query();
+
+    }
+
+    this.createNewGamePlan = function(){
+         console.log('create new Game plan');
+        this.currentPlan = $resource('rest/games/suggested', {}, {query: {method:'POST', isArray:true}}).query();
+    }
 });
 

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.scorekeeper.rest.vo.GameVO;
+import com.github.scorekeeper.rest.vo.SuggestedGameVO;
 import com.github.scorekeeper.service.GameService;
+import com.github.scorekeeper.service.SuggestedGameService;
 
 @Controller
 @RequestMapping("/games")
@@ -21,6 +23,9 @@ public class GameController {
 
 	@Resource
 	private GameService gameService;
+
+	@Resource
+	private SuggestedGameService suggestedGameService;
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ResponseBody
@@ -35,4 +40,16 @@ public class GameController {
 		return gameService.listGames(pageSize, page);
 	}
 
+	@RequestMapping(value = "/suggested", method = RequestMethod.GET)
+	@ResponseBody
+	public List<SuggestedGameVO> findAllSuggestedGames() {
+		return suggestedGameService.getAllSuggestedGames();
+	}
+
+	@RequestMapping(value = "/suggested", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SuggestedGameVO> createSuggestedGames() {
+
+		return suggestedGameService.createNewSuggestions();
+	}
 }

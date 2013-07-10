@@ -1,24 +1,6 @@
 
-<div class="container" ng-controller="HomeCtrl">
+<div class="container" ng-controller="PlanCtrl">
 
-    <style>
-        .brand{
-            display: block;
-            margin-left:auto;
-            margin-right:auto;
-        }
-        .kicker{
-            display: block;
-            padding-bottom: 50px;
-            margin-left:auto;
-            margin-right:auto;
-            opacity:0.4;
-            filter:alpha(opacity=40); /* For IE8 and earlier */
-
-        }
-
-    </style>
-        <img src="assets/img/kicker2.jpg" class="kicker">
     <style>
         .teama{
             /*background-color: #00ff00;*/
@@ -44,23 +26,23 @@
 
     </style>
     <div class="btn" ng-click="startNewPlan()" ng-show="hasRole('SCOREADMIN')">Starte neuen Spieltag</div>
-    <h3>Vorgeschlagene Spiele</h3>
+
     <table class="table">
         <thead>
 
-        <th colspan="2">{{ 'view.games.table.colta' | i18n }}</th>
-        <th colspan="2">{{ 'view.games.table.coltb' | i18n }}</th>
+            <th colspan="2">{{ 'view.games.table.colta' | i18n }}</th>
+            <th colspan="2">{{ 'view.games.table.coltb' | i18n }}</th>
 
-        <th>&nbsp;</th>
+            <th>&nbsp;</th>
 
         </thead>
         <thead>
 
-        <th>{{ 'view.games.table.col2' | i18n }}</th>
-        <th>{{ 'view.games.table.col3' | i18n }}</th>
-        <th>{{ 'view.games.table.col4' | i18n }}</th>
-        <th>{{ 'view.games.table.col5' | i18n }}</th>
-        <th>{{ 'view.games.table.col6' | i18n }}</th>
+            <th>{{ 'view.games.table.col2' | i18n }}</th>
+            <th>{{ 'view.games.table.col3' | i18n }}</th>
+            <th>{{ 'view.games.table.col4' | i18n }}</th>
+            <th>{{ 'view.games.table.col5' | i18n }}</th>
+            <th>{{ 'view.games.table.col6' | i18n }}</th>
 
         </thead>
         <tbody>
@@ -78,9 +60,6 @@
         </tr>
         </tbody>
     </table>
-
-
-
 
 
 

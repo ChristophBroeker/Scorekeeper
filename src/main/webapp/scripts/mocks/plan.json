@@ -1,0 +1,18 @@
+[
+    {
+        "teamA":[3,26],
+        "teamB":[4,11],
+        "teamAScore":0,
+        "teamBScore":0,
+        "result":"WIN_B",
+        "playedDate":1373367503832
+    },
+    {
+        "teamA":[3,4],
+        "teamB":[5,8],
+        "teamAScore":0,
+        "teamBScore":0,
+        "result":"",
+        "playedDate":1373364278515
+    }
+]

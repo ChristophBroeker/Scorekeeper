@@ -26,10 +26,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.scorekeeper.persistence.dao.GameRepository;
 import com.github.scorekeeper.persistence.dao.PlayerRepository;
+import com.github.scorekeeper.persistence.dao.SuggestedGameRepository;
 import com.github.scorekeeper.persistence.entity.Game;
 import com.github.scorekeeper.persistence.entity.Player;
 import com.github.scorekeeper.persistence.entity.ResultType;
 import com.github.scorekeeper.persistence.entity.Score;
+import com.github.scorekeeper.persistence.entity.SuggestedGame;
 import com.github.scorekeeper.rest.vo.GameVO;
 import com.github.scorekeeper.rest.vo.ScoreBoardEntryVO;
 import com.google.common.base.Function;
@@ -40,6 +42,9 @@ public class GameService {
 
 	@Resource
 	private GameRepository gameRepository;
+
+	@Resource
+	private SuggestedGameRepository suggestedGameRepository;
 
 	@Resource
 	private PlayerRepository playerRepository;
@@ -64,8 +69,47 @@ public class GameService {
 		gameEntity.setQuality(new BigDecimal(matchQuality));
 
 		updatePlayerScores(gameEntity, gameInfo);
-
+		checkForSuggestedGame(gameEntity);
 		return gameRepository.save(gameEntity).getId();
+	}
+
+	@Transactional
+	private void checkForSuggestedGame(Game gameEntity) {
+		Iterable<SuggestedGame> suggestedGames = suggestedGameRepository.findAll();
+		for (SuggestedGame suggestedGame : suggestedGames) {
+			if (hasTeamPlayed(gameEntity, suggestedGame.getTeamA())
+					&& hasTeamPlayed(gameEntity, suggestedGame.getTeamB())) {
+				suggestedGame.setPlayedDate(gameEntity.getPlayedDate());
+				suggestedGame.setQuality(gameEntity.getQuality());
+				suggestedGame.setResult(gameEntity.getResult());
+				suggestedGame.setTeamAScore(gameEntity.getTeamAScore());
+				suggestedGame.setTeamBScore(gameEntity.getTeamBScore());
+
+				suggestedGameRepository.save(suggestedGame);
+			}
+
+		}
+
+	}
+
+	@Transactional
+	private boolean hasTeamPlayed(Game game, List<Player> team) {
+		boolean result;
+		List<Long> teamIds = new ArrayList<Long>();
+		teamIds.add(team.get(0).getId());
+		teamIds.add(team.get(1).getId());
+
+		List<Long> teamAIds = new ArrayList<Long>();
+		teamAIds.add(game.getTeamA().get(0).getId());
+		teamAIds.add(game.getTeamA().get(1).getId());
+
+		List<Long> teamBIds = new ArrayList<Long>();
+		teamBIds.add(game.getTeamB().get(0).getId());
+		teamBIds.add(game.getTeamB().get(1).getId());
+
+		result = teamAIds.containsAll(teamIds);
+		result = result || teamBIds.containsAll(teamIds);
+		return result;
 	}
 
 	private void updatePlayerScores(Game gameEntity, GameInfo gameInfo) {

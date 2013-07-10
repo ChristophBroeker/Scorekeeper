@@ -15,10 +15,21 @@
 
 	<profiles>
 		<profile>
+			<id>live</id>
+			<properties>
+				<db.driverClassName>org.h2.Driver</db.driverClassName>
+				<db.url>jdbc:h2:U:/scorekeeper/scorekeeper-db</db.url>
+				<db.username>sa</db.username>
+				<db.password></db.password>
+				<jpa.database>H2</jpa.database>
+				<jpa.generateDdl>true</jpa.generateDdl>
+			</properties>
+		</profile>
+		<profile>
 			<id>dev</id>
 			<properties>
 				<db.driverClassName>org.h2.Driver</db.driverClassName>
-				<db.url>jdbc:h2:~/scorekeeper-db</db.url>
+				<db.url>jdbc:h2:U:/scorekeeper/scorekeeper-db-dev</db.url>
 				<db.username>sa</db.username>
 				<db.password></db.password>
 				<jpa.database>H2</jpa.database>
