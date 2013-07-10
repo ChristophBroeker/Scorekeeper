@@ -76,29 +76,31 @@ public class GameService {
 	@Transactional
 	private void checkForSuggestedGame(Game gameEntity) {
 		Iterable<SuggestedGame> suggestedGames = suggestedGameRepository.findAll();
-		for (SuggestedGame suggestedGame : suggestedGames) {
-			if (hasTeamPlayed(gameEntity, suggestedGame.getTeamA())
-					&& hasTeamPlayed(gameEntity, suggestedGame.getTeamB())) {
+		if (gameEntity.getTeamA().size() == 2 && gameEntity.getTeamB().size() == 2) {
+			for (SuggestedGame suggestedGame : suggestedGames) {
+				if (hasTeamPlayed(gameEntity, suggestedGame.getTeamA())
+						&& hasTeamPlayed(gameEntity, suggestedGame.getTeamB())) {
 
-				suggestedGame.setPlayedDate(gameEntity.getPlayedDate());
-				suggestedGame.setQuality(gameEntity.getQuality());
-				suggestedGame.setResult(gameEntity.getResult());
+					suggestedGame.setPlayedDate(gameEntity.getPlayedDate());
+					suggestedGame.setQuality(gameEntity.getQuality());
+					suggestedGame.setResult(gameEntity.getResult());
 
-				Long suggUserTA = suggestedGame.getTeamA().get(0).getId();
-				List<Long> teamAIds = new ArrayList<Long>();
-				teamAIds.add(gameEntity.getTeamA().get(0).getId());
-				teamAIds.add(gameEntity.getTeamA().get(1).getId());
-				if (teamAIds.contains(suggUserTA)) {
-					suggestedGame.setTeamAScore(gameEntity.getTeamAScore());
-					suggestedGame.setTeamBScore(gameEntity.getTeamBScore());
-				} else {
-					suggestedGame.setTeamAScore(gameEntity.getTeamBScore());
-					suggestedGame.setTeamBScore(gameEntity.getTeamAScore());
+					Long suggUserTA = suggestedGame.getTeamA().get(0).getId();
+					List<Long> teamAIds = new ArrayList<Long>();
+					teamAIds.add(gameEntity.getTeamA().get(0).getId());
+					teamAIds.add(gameEntity.getTeamA().get(1).getId());
+					if (teamAIds.contains(suggUserTA)) {
+						suggestedGame.setTeamAScore(gameEntity.getTeamAScore());
+						suggestedGame.setTeamBScore(gameEntity.getTeamBScore());
+					} else {
+						suggestedGame.setTeamAScore(gameEntity.getTeamBScore());
+						suggestedGame.setTeamBScore(gameEntity.getTeamAScore());
+					}
+
+					suggestedGameRepository.save(suggestedGame);
 				}
 
-				suggestedGameRepository.save(suggestedGame);
 			}
-
 		}
 
 	}
