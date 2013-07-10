@@ -42,15 +42,25 @@ GameService.service('GameService', function($resource, $http){
         return  $resource('rest/scoreboard', {}, {query: {method:'GET', isArray:true}}).query();
     };
 
-    this.currentPlan = {};
+    var currentPlan = {plan:[]};
     this.getCurrentGamePlan = function(){
-        this.currentPlan = $resource('rest/games/suggested', {}, {query: {method:'GET', isArray:true}}).query();
-
+        console.log("getCurrentGamePlan");
+        currentPlan.plan = $resource('rest/games/suggested', {}, {query: {method:'GET', isArray:true}}).query();
+        return currentPlan;
     }
 
     this.createNewGamePlan = function(){
          console.log('create new Game plan');
-        this.currentPlan = $resource('rest/games/suggested', {}, {query: {method:'POST', isArray:true}}).query();
+        $http({method: 'POST',url: 'rest/games/suggested'})
+            .success(function(response) {
+
+                currentPlan.plan = $resource('rest/games/suggested', {}, {query: {method:'GET', isArray:true}}).query();
+                console.log('success: '+response.data);
+            })
+            .error(function(response) {
+                console.log('error: '+response);
+            });
+        //this.currentPlan = $resource('rest/games/suggested', {}, {query: {method:'POST', isArray:true}}).query();
     }
 });
 

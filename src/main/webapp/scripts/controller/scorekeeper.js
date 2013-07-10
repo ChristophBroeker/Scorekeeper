@@ -310,11 +310,12 @@ ScoreKeeper.controller('HomeCtrl',
     ['$scope', 'GameService',
         function ($scope, GameService) {
 
-            GameService.getCurrentGamePlan();
 
-            $scope.currentPlan = GameService.currentPlan;
+
+            $scope.currentPlan =  GameService.getCurrentGamePlan();
             $scope.startNewPlan = function () {
                 GameService.createNewGamePlan();
+                $scope.currentPlan = GameService.getCurrentGamePlan();
             }
 
         }

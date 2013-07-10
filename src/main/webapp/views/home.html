@@ -66,7 +66,7 @@
         <tbody>
 
         <!--<tr ng-repeat="game in games | gameListFilter:searchText">-->
-        <tr ng-repeat="game in currentPlan">
+        <tr ng-repeat="game in currentPlan.plan">
 
             <td class="teama">{{game.teamA[0] | playerName}}</td>
             <td class="teama">{{game.teamA[1] | playerName}}</td>
