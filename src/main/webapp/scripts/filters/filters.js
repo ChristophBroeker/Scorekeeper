@@ -50,7 +50,7 @@ ScoreKeeper.filter('highlight', function () {
                 text = text.toString();
                 search = search.toString();
                 var cssClass = "ui-match"+(i+1);
-                if(text.indexOf(search) > -1){
+                if(text.toUpperCase().indexOf(search.toUpperCase()) > -1){
                     result = text.replace(new RegExp(search, 'gi'), '<span class="'+cssClass+'">$&</span>');
                 }
 
