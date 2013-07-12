@@ -168,7 +168,7 @@ ScoreKeeper.controller('GamesCtrl',
         function ($scope, $route, PlayerService, GameService) {
             $scope.playerNames = PlayerService.getAllPlayers();
 
-            $scope.itemsPerPage = 10;
+            $scope.itemsPerPage = 1000;
             $scope.currentListPage = 0;
             $scope.games = GameService.getAllGames($scope.itemsPerPage, $scope.currentListPage);
             var game = {"teamA": [],
