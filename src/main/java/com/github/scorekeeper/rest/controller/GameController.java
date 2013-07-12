@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,7 @@ public class GameController {
 	@Resource
 	private SuggestedGameService suggestedGameService;
 
+	@PreAuthorize("hasRole('SCOREADMIN')")
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ResponseBody
 	public Long addGame(@RequestBody GameVO game) {
@@ -34,18 +36,21 @@ public class GameController {
 		return gameService.addGame(game);
 	}
 
+	@PreAuthorize("permitAll")
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	@ResponseBody
 	public List<GameVO> findAllGames(@RequestParam("pageSize") int pageSize, @RequestParam("page") int page) {
 		return gameService.listGames(pageSize, page);
 	}
 
+	@PreAuthorize("permitAll")
 	@RequestMapping(value = "/suggested", method = RequestMethod.GET)
 	@ResponseBody
 	public List<SuggestedGameVO> findAllSuggestedGames() {
 		return suggestedGameService.getAllSuggestedGames();
 	}
 
+	@PreAuthorize("hasRole('SCOREADMIN')")
 	@RequestMapping(value = "/suggested", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SuggestedGameVO> createSuggestedGames() {

@@ -6,13 +6,34 @@
                     http://www.springframework.org/schema/security 
                     http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
+
+
     <http use-expressions="true">
-    
-<!--     	<intercept-url method="GET" pattern="/rest/scoreboard" access="permitAll" /> -->
-<!--     	<intercept-url method="GET" pattern="/rest/user/currentUser" access="permitAll" /> -->
-<!--         <intercept-url method="GET" pattern="/rest/**" access="isAuthenticated()" /> -->
-<!--         <intercept-url method="PUT" pattern="/rest/games" access="hasRole('SCOREADMIN')" /> -->
-<!--         <intercept-url method="PUT" pattern="/rest/players" access="hasRole('SCOREADMIN')" /> -->
+		    
+<intercept-url method="POST" pattern="/rest/games" access="hasRole('SCOREADMIN')" />
+<intercept-url method="GET" pattern="/rest/games" access="permitAll" />
+<intercept-url method="GET" pattern="/rest/games/suggested" access="permitAll" />
+<intercept-url method="POST" pattern="/rest/games/suggested" access="hasRole('SCOREADMIN')" />
+<intercept-url method="GET" pattern="/rest/players" access="permitAll" />
+<!--  <intercept-url method="GET" pattern="/rest/players/{id}" access="hasRole('USER')" /> -->
+
+<intercept-url method="POST" pattern="/rest/players" access="hasRole('SCOREADMIN')" />
+<intercept-url method="POST" pattern="/rest/players/delete/**" access="hasRole('SCOREADMIN')" />
+
+<intercept-url method="GET" pattern="/rest/scoreboard" access="permitAll" />
+
+<intercept-url method="GET" pattern="/rest/user/currentUser" access="permitAll" />
+
+<intercept-url method="POST" pattern="/rest/user/changeUsersPassword" access="hasRole('USER')" />
+
+<intercept-url method="POST" pattern="/rest/user/{name}/{firstPassword}" access="hasRole('APPADMIN')" />
+
+<intercept-url method="DELETE" pattern="/rest/user/{id}" access="hasRole('APPADMIN')" />
+
+<intercept-url method="GET" pattern="/rest/user" access="hasRole('APPADMIN')" />
+<intercept-url method="PUT" pattern="/rest/user/roles/{userId}" access="hasRole('APPADMIN')" />
+
+
         
         <form-login login-page="/index.html"/>
         <logout logout-url="/logout.html"/>

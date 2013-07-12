@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,6 +29,7 @@ public class UserController {
 	@Resource
 	private UserService userService;
 
+	@PreAuthorize("permitAll")
 	@RequestMapping(value = "/currentUser", method = { RequestMethod.GET })
 	@ResponseBody
 	public UserTransferVO getUser() {
@@ -48,30 +50,35 @@ public class UserController {
 		return new UserTransferVO(u.getId(), u.getName(), roles, u.hasChangedPassword());
 	}
 
+	@PreAuthorize("hasRole('USER')")
 	@RequestMapping(value = "/changeUsersPassword/{userId}/{newPassword}", method = RequestMethod.POST)
 	@ResponseBody
 	public void changeUsersPassword(@PathVariable("userId") Long userid, @PathVariable("newPassword") String newPassword) {
 		userService.changeUserPassword(userid, newPassword);
 	}
 
+	@PreAuthorize("hasRole('APPADMIN')")
 	@RequestMapping(value = "/{name}/{firstPassword}", method = RequestMethod.POST)
 	@ResponseBody
 	public User addUser(@PathVariable("name") String name, @PathVariable("firstPassword") String firstPassword) {
 		return userService.addNewUser(name, firstPassword);
 	}
 
+	@PreAuthorize("hasRole('APPADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	@ResponseBody
 	public void deleteUser(@PathVariable("id") Long id) {
 		userService.deleteUser(id);
 	}
 
+	@PreAuthorize("hasRole('APPADMIN')")
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	@ResponseBody
 	public List<UserTransferVO> getAllUser() {
 		return userService.getAllUser();
 	}
 
+	@PreAuthorize("hasRole('APPADMIN')")
 	@RequestMapping(value = "/roles/{userId}", method = RequestMethod.PUT)
 	@ResponseBody
 	public void updateUserRole(@PathVariable("userId") Long userId, @RequestBody Map<String, Boolean> roles) {
