@@ -35,8 +35,16 @@
             background: rgba(80, 80, 80, .2);
         }
 
+        .ui-match1 { background-color: lightyellow !important; }
+        .ui-match2 { background-color: lightsalmon !important; }
+        .ui-match3 { background-color: lightskyblue !important; }
+        .ui-match4 { background-color: lightgreen !important; }
+
     </style>
-    <input type="text" ng-model="searchText" placeholder="{{ 'view.games.filter.placeholder' | i18n }}"/>
+    <input class="ui-match1" type="text" ng-model="searchText" placeholder="{{ 'view.games.filter.placeholder' | i18n }}"/>
+    <input class="ui-match2" type="text" ng-model="searchText2" placeholder="{{ 'view.games.filter.placeholder' | i18n }}"/>
+    <input class="ui-match3" type="text" ng-model="searchText3" placeholder="{{ 'view.games.filter.placeholder' | i18n }}"/>
+    <input class="ui-match4" type="text" ng-model="searchText4" placeholder="{{ 'view.games.filter.placeholder' | i18n }}"/>
     <table class="table">
         <thead>
             <th>&nbsp;</th>
@@ -60,13 +68,13 @@
         <tbody>
 
         <!--<tr ng-repeat="game in games | gameListFilter:searchText">-->
-        <tr ng-repeat="game in games | gameListFilter:searchText | orderBy:'-playedDate'">
+        <tr ng-repeat="game in games | gameListFilter:searchText | gameListFilter:searchText2 | gameListFilter:searchText3 | gameListFilter:searchText4 | orderBy:'-playedDate'">
             <td>{{game.playedDate | date:'dd.MM.yyyy HH:mm'}}</td>
-            <td class="teama">{{game.teamA[0] | playerName}}</td>
-            <td class="teama">{{game.teamA[1] | playerName}}</td>
+            <td class="teama" ng-bind-html-unsafe="game.teamA[0] | playerName | highlight:[searchText, searchText2, searchText3, searchText4]"></td>
+            <td class="teama" ng-bind-html-unsafe="game.teamA[1] | playerName | highlight:[searchText, searchText2, searchText3, searchText4]"></td>
 
-            <td class="teamb">{{game.teamB[0] | playerName}}</td>
-            <td class="teamb">{{game.teamB[1] | playerName}}</td>
+            <td class="teamb" ng-bind-html-unsafe="game.teamB[0] | playerName | highlight:[searchText, searchText2, searchText3, searchText4]"></td>
+            <td class="teamb" ng-bind-html-unsafe="game.teamB[1] | playerName | highlight:[searchText, searchText2, searchText3, searchText4]"></td>
             <td>{{game.teamAScore}} : {{game.teamBScore}}</td>
 
         </tr>
