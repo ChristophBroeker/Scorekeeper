@@ -98,7 +98,7 @@ angular.module('skI18n', ['ngSanitize'])
                         return this.messageFormat(text, params);
                     }
                 } else {
-                    // TODO: Push error to server
+
 
                     return '' + key;
                 }

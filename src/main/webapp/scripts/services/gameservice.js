@@ -6,61 +6,62 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var GameService = angular.module('game.services', ['ngResource'], null);
-
-GameService.service('GameService', function($resource, $http){
-
-    var gameList = null;
-
-        this.getAllGames = function(pageSize, forPage){
-            console.log("get all Games_ "+pageSize + " "+forPage);
 
 
-                gameList = $resource('rest/games', {pageSize: pageSize, page:forPage}, {query: {method:'GET', isArray:true}}).query();
+angular.module('game.services', ['ngResource'], null)
+
+    .service('GameService', function ($resource, $http) {
+
+        var gameList = null;
+
+        this.getAllGames = function (pageSize, forPage) {
+            console.log("get all Games_ " + pageSize + " " + forPage);
+
+
+            gameList = $resource('rest/games', {pageSize: pageSize, page: forPage}, {query: {method: 'GET', isArray: true}}).query();
 
 
             return gameList
 
 
-
         };
 
-    this.addNewGame = function(newGame){
-        console.log("add new Game");
-        $http({method: 'POST',url: 'rest/games',data: newGame})
-            .success(function(response) {
+        this.addNewGame = function (newGame) {
+            console.log("add new Game");
+            $http({method: 'POST', url: 'rest/games', data: newGame})
+                .success(function (response) {
 
-                gameList.push(newGame);
-                console.log('success: '+response.data);
-            })
-            .error(function(response) {
-                console.log('error: '+response);
-            });
-    };
+                    gameList.push(newGame);
+                    console.log('success: ' + response.data);
+                })
+                .error(function (response) {
+                    console.log('error: ' + response);
+                });
+        };
 
-    this.getScoreTable = function(){
-        return  $resource('rest/scoreboard', {}, {query: {method:'GET', isArray:true}}).query();
-    };
+        this.getScoreTable = function () {
+            return  $resource('rest/scoreboard', {}, {query: {method: 'GET', isArray: true}}).query();
+        };
 
-    var currentPlan = {plan:[]};
-    this.getCurrentGamePlan = function(){
-        console.log("getCurrentGamePlan");
-        currentPlan.plan = $resource('rest/games/suggested', {}, {query: {method:'GET', isArray:true}}).query();
-        return currentPlan;
-    }
+        var currentPlan = {plan: []};
+        this.getCurrentGamePlan = function () {
+            console.log("getCurrentGamePlan");
+            currentPlan.plan = $resource('rest/games/suggested', {}, {query: {method: 'GET', isArray: true}}).query();
+            return currentPlan;
+        }
 
-    this.createNewGamePlan = function(){
-         console.log('create new Game plan');
-        $http({method: 'POST',url: 'rest/games/suggested'})
-            .success(function(response) {
+        this.createNewGamePlan = function () {
+            console.log('create new Game plan');
+            $http({method: 'POST', url: 'rest/games/suggested'})
+                .success(function (response) {
 
-                currentPlan.plan = $resource('rest/games/suggested', {}, {query: {method:'GET', isArray:true}}).query();
-                console.log('success: '+response.data);
-            })
-            .error(function(response) {
-                console.log('error: '+response);
-            });
-        //this.currentPlan = $resource('rest/games/suggested', {}, {query: {method:'POST', isArray:true}}).query();
-    }
-});
+                    currentPlan.plan = $resource('rest/games/suggested', {}, {query: {method: 'GET', isArray: true}}).query();
+                    console.log('success: ' + response.data);
+                })
+                .error(function (response) {
+                    console.log('error: ' + response);
+                });
+            //this.currentPlan = $resource('rest/games/suggested', {}, {query: {method:'POST', isArray:true}}).query();
+        }
+    });
 

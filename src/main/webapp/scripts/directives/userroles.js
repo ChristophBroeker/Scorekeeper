@@ -7,20 +7,21 @@
  */
 
 
+angular.module('userRoleDirevtive', [])
 
-ScoreKeeper.directive("userrole", function(){
-    return {
-        restrict: 'A',
+    .directive("userrole", function () {
+        return {
+            restrict: 'A',
 
-        scope: {
-            role: '@',
-            containsRole: '=',
-            user: '='
-        },
+            scope: {
+                role: '@',
+                containsRole: '=',
+                user: '='
+            },
 
-         //containsRole(user.roles, role)
-        template: '<div class="btn" >{{role}} - {{user.name}} - {{containsRole}}</div>'
+            //containsRole(user.roles, role)
+            template: '<div class="btn" >{{role}} - {{user.name}} - {{containsRole}}</div>'
 
 
-    };
-});
+        };
+    });
