@@ -9,11 +9,15 @@
     "navbar.link.player": "Spieler",
     "navbar.link.admin": "Administration",
     "navbar.link.rules": "Regeln",
+
     "navbar.login.login": "Benutzername",
     "navbar.login.password": "Passwort",
     "navbar.login.button": "Einloggen",
 
     "navbar.login.loggedin.message": "Hallo {0}",
+
+    "view.home.start.button": "Starte neuen Spieltag",
+    "view.home.games.title": "Vorgeschlagene Spiele",
 
     "view.board.table.title.col1": "Position:",
     "view.board.table.title.col2": "Name:",

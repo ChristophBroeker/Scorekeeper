@@ -9,19 +9,24 @@
     "navbar.link.player": "Spieler",
     "navbar.link.admin": "Administration",
     "navbar.link.rules": "Regeln",
-    "navbar.link.plan": "Spielplan",
+
     "navbar.login.login": "Benutzername",
     "navbar.login.password": "Passwort",
     "navbar.login.button": "Einloggen",
 
     "navbar.login.loggedin.message": "Hallo {0}",
 
+    "view.home.start.button": "Starte neuen Spieltag",
+    "view.home.games.title": "Vorgeschlagene Spiele",
+
     "view.board.table.title.col1": "Position:",
     "view.board.table.title.col2": "Name:",
-    "view.board.table.title.col3": "Stärke:",
-    "view.board.table.title.col4": "Spiele:",
-    "view.board.table.title.col5": "gewonnen:",
-    "view.board.table.title.col6": "verloren:",
+    "view.board.table.title.col3": "bereinigte Stärke:",
+    "view.board.table.title.col4": "Stärke:",
+    "view.board.table.title.col5": "Unsicherheit:",
+    "view.board.table.title.col6": "Spiele:",
+    "view.board.table.title.col7": "gewonnen:",
+    "view.board.table.title.col8": "verloren:",
 
     "view.games.newgame.title": "neues Spiel eintragen:",
     "view.games.newgame.tap1.placeholder": "Team A Pl. 1",

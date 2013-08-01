@@ -9,11 +9,15 @@
     "navbar.link.player": "Player",
     "navbar.link.admin": "Administration",
     "navbar.link.rules": "Rules",
+
     "navbar.login.login": "Username",
     "navbar.login.password": "Password",
     "navbar.login.button": "Login",
 
     "navbar.login.loggedin.message": "Hi {0}",
+
+    "view.home.start.button": "Starte neuen Spieltag",
+    "view.home.games.title": "Vorgeschlagene Spiele",
 
     "view.board.table.title.col1": "Ranking:",
     "view.board.table.title.col2": "Name:",
@@ -94,5 +98,18 @@
     "view.rules.2v2.li1.ul.footer": "keine Mittelfeldtore und werden somit normal gezählt.",
     "view.rules.2v2.li1.footer": "Im Falle eines Mittelfeldtores, bekommt der Abwehrspieler des Teams auf dessen Seite das Tor gefallen ist, den Ball.",
     "view.rules.footer": "Mehr fällt mir gerade nicht ein... Wenn Euch noch etwas einfällt, gerne an mich!"
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

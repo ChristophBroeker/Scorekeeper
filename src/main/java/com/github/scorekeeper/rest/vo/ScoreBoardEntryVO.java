@@ -15,6 +15,7 @@ public class ScoreBoardEntryVO {
 
 	private String playerName;
 	private BigDecimal currentMean;
+	private BigDecimal standarddeviation;
 	private BigInteger playedGames;
 	private BigInteger wonGames;
 	private BigInteger lostGames;
@@ -22,8 +23,9 @@ public class ScoreBoardEntryVO {
 	public ScoreBoardEntryVO(Object[] data) {
 		setPlayerName((String) data[0]);
 		setCurrentMean((BigDecimal) data[1]);
-		setPlayedGames((BigInteger) data[2]);
-		setWonGames((BigInteger) data[3]);
+		setStandarddeviation((BigDecimal) data[2]);
+		setPlayedGames((BigInteger) data[3]);
+		setWonGames((BigInteger) data[4]);
 		setLostGames(getPlayedGames().subtract(getWonGames()));
 	}
 
@@ -65,6 +67,14 @@ public class ScoreBoardEntryVO {
 
 	public void setLostGames(BigInteger lostGames) {
 		this.lostGames = lostGames;
+	}
+
+	public BigDecimal getStandarddeviation() {
+		return standarddeviation;
+	}
+
+	public void setStandarddeviation(BigDecimal standarddeviation) {
+		this.standarddeviation = standarddeviation;
 	}
 
 }

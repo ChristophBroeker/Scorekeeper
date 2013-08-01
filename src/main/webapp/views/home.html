@@ -43,8 +43,8 @@
         }
 
     </style>
-    <div class="btn" ng-click="startNewPlan()" ng-show="hasRole('SCOREADMIN')">Starte neuen Spieltag</div>
-    <h3>Vorgeschlagene Spiele</h3>
+    <div class="btn" ng-click="startNewPlan()" ng-show="hasRole('SCOREADMIN')">{{ 'view.home.start.button' | i18n}}</div>
+    <h3>{{ 'view.home.games.title' | i18n}}</h3>
     <table class="table">
         <thead>
 

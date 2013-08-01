@@ -24,7 +24,7 @@ angular.module('scorekeeperFilters', [])
                     if (playerName == null) {
                         return items;
                     }
-                    console.log('gameListFilter', arguments);
+
                     var filtered = [];
                     angular.forEach(items, function (item) {
                         var teamAPlayer1 = PlayerService.getPlayer(item.teamA[0]);
@@ -52,7 +52,8 @@ angular.module('scorekeeperFilters', [])
                     text = text.toString();
                     search = search.toString();
                     var cssClass = "ui-match" + (i + 1);
-                    if (text.toUpperCase().indexOf(search.toUpperCase()) > -1) {
+                    if (text.toUpperCase().indexOf(search.toUpperCase())==  0) {
+
                         result = text.replace(new RegExp(search, 'gi'), '<span class="' + cssClass + '">$&</span>');
                     }
 
