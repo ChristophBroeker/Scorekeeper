@@ -43,6 +43,11 @@ angular.module('game.services', ['ngResource'], null)
             return  $resource('rest/scoreboard', {}, {query: {method: 'GET', isArray: true}}).query();
         };
 
+        this.getNotRankedBoard = function () {
+            console.log("getNotRankedBoard ");
+            return  $resource('rest/scoreboard/notranked', {}, {query: {method: 'GET', isArray: true}}).query();
+        };
+
         var currentPlan = {plan: []};
         this.getCurrentGamePlan = function () {
             console.log("getCurrentGamePlan");

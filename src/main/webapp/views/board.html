@@ -1,28 +1,47 @@
-
 <div class="container">
 
-    <table class="table">
+    <h4>aktuelle viaprinto-Tabelle</h4>
+    <table class="table table-hover">
         <thead>
-            <th>{{ 'view.board.table.title.col1' | i18n }}</th>
+        <th>{{ 'view.board.table.title.col1' | i18n }}</th>
+        <th>{{ 'view.board.table.title.col2' | i18n }}</th>
+        <th>{{ 'view.board.table.title.col4' | i18n }}</th>
+        <th>{{ 'view.board.table.title.col5' | i18n }}</th>
+        <th>{{ 'view.board.table.title.col6' | i18n }}</th>
+        <th>{{ 'view.board.table.title.col7' | i18n }}</th>
+        <th>{{ 'view.board.table.title.col8' | i18n }}</th>
+        </thead>
+        <tbody>
+        <tr ng-repeat="player in board">
+            <td>{{$index + 1}}</td>
+            <td>{{player.playerName}}</td>
+            <td>{{player.currentMean}}</td>
+            <td>{{player.standarddeviation}}</td>
+            <td>{{player.playedGames}}</td>
+            <td>{{player.wonGames}}</td>
+            <td>{{player.lostGames}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+    <h4>nicht platzierte Spieler</h4>
+    <table class="table table-hover">
+        <thead>
+
             <th>{{ 'view.board.table.title.col2' | i18n }}</th>
-            <th>{{ 'view.board.table.title.col3' | i18n }}</th>
-            <th>{{ 'view.board.table.title.col4' | i18n }}</th>
             <th>{{ 'view.board.table.title.col5' | i18n }}</th>
             <th>{{ 'view.board.table.title.col6' | i18n }}</th>
             <th>{{ 'view.board.table.title.col7' | i18n }}</th>
             <th>{{ 'view.board.table.title.col8' | i18n }}</th>
         </thead>
         <tbody>
-          <tr ng-repeat="player in board">
-              <td>{{$index + 1}}</td>
-              <td>{{player.playerName}}</td>
-              <td>{{(player.currentMean - player.standarddeviation) | number:2}}</td>
-              <td>{{player.currentMean}}</td>
-              <td>{{player.standarddeviation}}</td>
-              <td>{{player.playedGames}}</td>
-              <td>{{player.wonGames}}</td>
-              <td>{{player.lostGames}}</td>
-          </tr>
+        <tr ng-repeat="ply in notRanked">
+            <td>{{ply.playerName}}</td>
+            <td>{{ply.standarddeviation}}</td>
+            <td>{{ply.playedGames}}</td>
+            <td>{{ply.wonGames}}</td>
+            <td>{{ply.lostGames}}</td>
+        </tr>
         </tbody>
     </table>
 

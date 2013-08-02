@@ -257,4 +257,14 @@ public class GameService {
 		}
 		return result;
 	}
+
+	@Transactional
+	public List<ScoreBoardEntryVO> getNotRankedBoard() {
+		List<Object[]> sc = gameRepository.getNotRankedBoard();
+		List<ScoreBoardEntryVO> result = new ArrayList<ScoreBoardEntryVO>();
+		for (Object[] sce : sc) {
+			result.add(new ScoreBoardEntryVO(sce));
+		}
+		return result;
+	}
 }

@@ -27,4 +27,11 @@ public class ScoreBoardController {
 		return gameService.getScoreBoard();
 	}
 
+	@PreAuthorize("permitAll")
+	@RequestMapping(value = "/notranked", method = RequestMethod.GET)
+	@ResponseBody
+	public List<ScoreBoardEntryVO> getNotRankedBoard() {
+		return gameService.getNotRankedBoard();
+	}
+
 }
