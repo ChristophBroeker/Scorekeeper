@@ -10,6 +10,7 @@
         <th>{{ 'view.board.table.title.col6' | i18n }}</th>
         <th>{{ 'view.board.table.title.col7' | i18n }}</th>
         <th>{{ 'view.board.table.title.col8' | i18n }}</th>
+        <th>Tage ohne Spiel</th>
         </thead>
         <tbody>
         <tr ng-repeat="player in board">
@@ -20,6 +21,7 @@
             <td>{{player.playedGames}}</td>
             <td>{{player.wonGames}}</td>
             <td>{{player.lostGames}}</td>
+            <td>{{player.daysWithoutGame}}</td>
         </tr>
         </tbody>
     </table>
@@ -44,6 +46,31 @@
         </tr>
         </tbody>
     </table>
+    <br/>
+    <div style="background-color: lightgrey">
+    <h4>inaktive Spieler</h4>
+    <table class="table table-hover">
+        <thead>
 
+        <th>{{ 'view.board.table.title.col2' | i18n }}</th>
+        <th>{{ 'view.board.table.title.col4' | i18n }}</th>
+        <th>{{ 'view.board.table.title.col5' | i18n }}</th>
+        <th>{{ 'view.board.table.title.col6' | i18n }}</th>
+        <th>{{ 'view.board.table.title.col7' | i18n }}</th>
+        <th>{{ 'view.board.table.title.col8' | i18n }}</th>
 
+        </thead>
+        <tbody>
+        <tr ng-repeat="ply in inactive">
+            <td>{{ply.playerName}}</td>
+            <td>{{ply.currentMean}}</td>
+            <td>{{ply.standarddeviation}}</td>
+            <td>{{ply.playedGames}}</td>
+            <td>{{ply.wonGames}}</td>
+            <td>{{ply.lostGames}}</td>
+
+        </tr>
+        </tbody>
+    </table>
+    </div>
 </div>

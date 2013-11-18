@@ -217,3 +217,4 @@ pip-log.txt
 
 target
 /src/main/webapp/.idea
+/src/main/webapp/projectFilesBackup/.idea/workspace.xml

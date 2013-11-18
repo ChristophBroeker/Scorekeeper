@@ -34,4 +34,10 @@ public class ScoreBoardController {
 		return gameService.getNotRankedBoard();
 	}
 
+	@PreAuthorize("permitAll")
+	@RequestMapping(value = "/inactive", method = RequestMethod.GET)
+	@ResponseBody
+	public List<ScoreBoardEntryVO> getInactiveBoard() {
+		return gameService.getInactiveBoard();
+	}
 }

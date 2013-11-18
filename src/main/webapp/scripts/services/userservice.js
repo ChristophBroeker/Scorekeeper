@@ -14,7 +14,7 @@ angular.module('user.services', ['ngResource'], null)
 
         this.currentLogin = null;
 
-        this.getCurrentUser = function (callBackFctn) {
+        this.getCurrentUser = function (callback) {
             console.log('getUser');
 
             var user = $resource('rest/user/currentUser', {}, {get: {method: 'GET', isArray: false}});
@@ -24,7 +24,7 @@ angular.module('user.services', ['ngResource'], null)
                     console.log("got User: " + response.name);
 
                     if (response.changedPassword == false) {
-                        callBackFctn();
+                        callback();
                     }
                 },
                 function err() {

@@ -253,7 +253,9 @@ public class GameService {
 		List<Object[]> sc = gameRepository.getScoreBoard();
 		List<ScoreBoardEntryVO> result = new ArrayList<ScoreBoardEntryVO>();
 		for (Object[] sce : sc) {
-			result.add(new ScoreBoardEntryVO(sce));
+			ScoreBoardEntryVO sbe = new ScoreBoardEntryVO(sce);
+			// if(sbe.getLastGameDate() )
+			result.add(sbe);
 		}
 		return result;
 	}
@@ -261,6 +263,16 @@ public class GameService {
 	@Transactional
 	public List<ScoreBoardEntryVO> getNotRankedBoard() {
 		List<Object[]> sc = gameRepository.getNotRankedBoard();
+		List<ScoreBoardEntryVO> result = new ArrayList<ScoreBoardEntryVO>();
+		for (Object[] sce : sc) {
+			result.add(new ScoreBoardEntryVO(sce));
+		}
+		return result;
+	}
+
+	@Transactional
+	public List<ScoreBoardEntryVO> getInactiveBoard() {
+		List<Object[]> sc = gameRepository.getInactiveBoard();
 		List<ScoreBoardEntryVO> result = new ArrayList<ScoreBoardEntryVO>();
 		for (Object[] sce : sc) {
 			result.add(new ScoreBoardEntryVO(sce));

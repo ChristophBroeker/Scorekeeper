@@ -151,6 +151,7 @@ angular.module('scorekeeper', ['player.services', 'game.services', 'user.service
             function ($scope, $route, GameService) {
                 $scope.board = GameService.getScoreTable();
                 $scope.notRanked = GameService.getNotRankedBoard();
+                $scope.inactive = GameService.getInactivePlayers();
 
 
             }

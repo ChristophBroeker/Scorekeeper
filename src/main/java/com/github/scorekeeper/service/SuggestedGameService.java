@@ -44,21 +44,22 @@ public class SuggestedGameService {
 		List<SuggestedGame> newGames = new ArrayList<SuggestedGame>();
 		List<SuggestedGame> oldGames = new ArrayList<SuggestedGame>();
 		List<Player> players = Lists.newArrayList(playerRepository.findAll());
+		suggestedGameRepository.deleteAll();
 		// find current suggestions
-		Iterable<SuggestedGame> currentGames = suggestedGameRepository.findAll();
-		for (SuggestedGame suggestedGame : currentGames) {
-			if (suggestedGame.getPlayedDate() == null) {
-				// not played yet
-				oldGames.add(suggestedGame);
-				players.remove(suggestedGame.getTeamA().get(0));
-				players.remove(suggestedGame.getTeamA().get(1));
-				players.remove(suggestedGame.getTeamB().get(0));
-				players.remove(suggestedGame.getTeamB().get(1));
-			} else {
-				// played and ready to remove
-				suggestedGameRepository.delete(suggestedGame);
-			}
-		}
+		// Iterable<SuggestedGame> currentGames = suggestedGameRepository.findAll();
+		// for (SuggestedGame suggestedGame : currentGames) {
+		// if (suggestedGame.getPlayedDate() == null) {
+		// // not played yet
+		// oldGames.add(suggestedGame);
+		// players.remove(suggestedGame.getTeamA().get(0));
+		// players.remove(suggestedGame.getTeamA().get(1));
+		// players.remove(suggestedGame.getTeamB().get(0));
+		// players.remove(suggestedGame.getTeamB().get(1));
+		// } else {
+		// // played and ready to remove
+		// suggestedGameRepository.delete(suggestedGame);
+		// }
+		// }
 
 		createSuggestedGame(newGames, players);
 		newGames.addAll(oldGames);
