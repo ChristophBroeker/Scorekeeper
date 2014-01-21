@@ -53,8 +53,8 @@
     </form>
     <table ng-show="showResult" style="border: solid 1px; text-align: center">
         <tr>
-            <td ng-class="teamAResult">TEAM A Score</td>
-            <td ng-class="teamBResult">TEAM B Score</td>
+            <td ng-class="teamAStyle()">TEAM A Score</td>
+            <td ng-class="teamBStyle()">TEAM B Score</td>
         </tr>
         <tr>
             <td ng-class="teamAStyle()">{{(result.teamA[0].currentScore.mean + result.teamA[1].currentScore.mean) | number:2}}</td>

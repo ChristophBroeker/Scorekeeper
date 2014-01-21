@@ -76,7 +76,7 @@
                                 <li ng-class="navClass('player')"><a href="#player" ng-show="hasRole('USER')">{{ 'navbar.link.player' | i18n }}</a></li>
                                 <li ng-class="navClass('admin')"><a href="#admin" ng-show="hasRole('APPADMIN')">{{ 'navbar.link.admin' | i18n }}</a></li>
                                 <li ng-class="navClass('rules')"><a href="#rules">{{ 'navbar.link.rules' | i18n }}</a></li>
-                                <li ng-class="navClass('calculation')"><a href="#calculation">{{ 'navbar.link.calculation' | i18n }}</a></li>
+                                <li ng-class="navClass('calculation')"><a href="#calculation" ng-show="hasRole('USER')">{{ 'navbar.link.calculation' | i18n }}</a></li>
 
                             </ul>
                             <form class="navbar-form pull-right" action="j_spring_security_check" method="POST" ng-show="!isLoggedIn()">
