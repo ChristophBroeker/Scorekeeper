@@ -1,0 +1,70 @@
+<div class="container" ng-controller="CalculatorCtrl">
+    <style>
+        .quality {
+
+
+
+            background-color: rgba(20, 155, 223, 0.50);
+        }
+
+        .winner {
+            background-color: rgba(24, 192, 20, 0.50);
+        }
+
+        .looser {
+            background-color: rgba(192, 97, 42, 0.50);
+        }
+
+        td{
+            padding: 10px;
+        }
+    </style>
+    <form class="form-inline" ng-submit="calculateGame()">
+        <h5>{{ 'view.calculator.calculategame.title' | i18n }}</h5>
+        <select class="span2" ng-model="newGame.teamA[0]">
+            <option value="">{{ 'view.games.newgame.tap1.placeholder' | i18n }}</option>
+            <option ng-repeat="player in playerNames" value="{{player.id}}">{{player.name}} --
+                {{player.currentScore.mean}}
+            </option>
+        </select>
+        <select class="span2" ng-model="newGame.teamA[1]">
+            <option value="">{{ 'view.games.newgame.tap2.placeholder' | i18n }}</option>
+            <option ng-repeat="player in playerNames" value="{{player.id}}">{{player.name}} --
+                {{player.currentScore.mean}}
+            </option>
+        </select>
+
+        <br/>
+        <br/>
+        <select class="span2" ng-model="newGame.teamB[0]">
+            <option value="">{{ 'view.games.newgame.tbp1.placeholder' | i18n }}</option>
+            <option ng-repeat="player in playerNames" value="{{player.id}}">{{player.name}} --
+                {{player.currentScore.mean}}
+            </option>
+        </select>
+        <select class="span2" ng-model="newGame.teamB[1]">
+            <option value="">{{ 'view.games.newgame.tbp2.placeholder' | i18n }}</option>
+            <option ng-repeat="player in playerNames" value="{{player.id}}">{{player.name}} --
+                {{player.currentScore.mean}}
+            </option>
+        </select>
+
+        <button type="submit" class="btn">{{ 'view.games.newgame.button' | i18n }}</button>
+    </form>
+    <table ng-show="showResult" style="border: solid 1px; text-align: center">
+        <tr>
+            <td ng-class="teamAResult">TEAM A Score</td>
+            <td ng-class="teamBResult">TEAM B Score</td>
+        </tr>
+        <tr>
+            <td ng-class="teamAStyle()">{{(result.teamA[0].currentScore.mean + result.teamA[1].currentScore.mean) | number:2}}</td>
+            <td ng-class="teamBStyle()">{{(result.teamB[0].currentScore.mean + result.teamB[1].currentScore.mean) | number:2}}</td>
+        </tr>
+        <tr class="quality">
+            <td colspan="2">Quality</td>
+        </tr>
+        <tr class="quality">
+            <td colspan="2">{{result.gameQuality | number:4}}</td>
+        </tr>
+    </table>
+</div>

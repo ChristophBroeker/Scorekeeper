@@ -1,5 +1,6 @@
 package com.github.scorekeeper.rest.vo;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -17,6 +18,7 @@ public class GameVO {
 	private Integer teamBScore;
 	private ResultType result;
 	private Calendar playedDate;
+	private BigDecimal quality;
 
 	public GameVO() {
 	}
@@ -28,6 +30,7 @@ public class GameVO {
 		this.setTeamB(convert(gameEntity.getTeamB()));
 		this.setTeamAScore(gameEntity.getTeamAScore());
 		this.setTeamBScore(gameEntity.getTeamBScore());
+		this.setQuality(gameEntity.getQuality());
 	}
 
 	private ArrayList<Long> convert(List<Player> players) {
@@ -86,6 +89,14 @@ public class GameVO {
 
 	public void setPlayedDate(Calendar playedDate) {
 		this.playedDate = playedDate;
+	}
+
+	public BigDecimal getQuality() {
+		return quality;
+	}
+
+	public void setQuality(BigDecimal quality) {
+		this.quality = quality;
 	}
 
 }

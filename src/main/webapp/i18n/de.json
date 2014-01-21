@@ -9,6 +9,7 @@
     "navbar.link.player": "Spieler",
     "navbar.link.admin": "Administration",
     "navbar.link.rules": "Regeln",
+    "navbar.link.calculation": "Kalkulator",
 
     "navbar.login.login": "Benutzername",
     "navbar.login.password": "Passwort",
@@ -45,6 +46,7 @@
     "view.games.table.col4": "Spieler 1:",
     "view.games.table.col5": "Spieler 2:",
     "view.games.table.col6": "Ergebnis",
+    "view.games.table.col7": "Spielqualität",
     "view.games.paging.current": "Seite: {0}",
     "view.games.paging.button.previous": "Vorherige Seite",
     "view.games.paging.button.next": "Nächste Seite",
@@ -99,7 +101,9 @@
     "view.rules.2v2.li1.li3": "Eigentore",
     "view.rules.2v2.li1.ul.footer": "keine Mittelfeldtore und werden somit normal gezählt.",
     "view.rules.2v2.li1.footer": "Im Falle eines Mittelfeldtores, bekommt der Abwehrspieler des Teams auf dessen Seite das Tor gefallen ist, den Ball.",
-    "view.rules.footer": "Mehr fällt mir gerade nicht ein... Wenn Euch noch etwas einfällt, gerne an mich!"
+    "view.rules.footer": "Mehr fällt mir gerade nicht ein... Wenn Euch noch etwas einfällt, gerne an mich!",
+
+    "view.calculator.calculategame.title": "Welche Zusammensetzung soll durchkalkuliert werden?"
 
 
 

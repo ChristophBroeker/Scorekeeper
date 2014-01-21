@@ -61,7 +61,7 @@ public class PlayerService {
 
 	}
 
-	private static List<PlayerVO> convert(Iterable<Player> players) {
+	public static List<PlayerVO> convert(Iterable<Player> players) {
 		return Lists.newArrayList(Iterables.transform(players, new Function<Player, PlayerVO>() {
 			@Override
 			public PlayerVO apply(Player player) {

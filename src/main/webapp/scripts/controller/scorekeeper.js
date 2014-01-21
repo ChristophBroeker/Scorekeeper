@@ -33,6 +33,10 @@ angular.module('scorekeeper', ['player.services', 'game.services', 'user.service
             {
                 templateUrl: "views/rules.html"
 
+            }).when('/calculation',
+            {
+                templateUrl: "views/secure/calculator.html"
+
             }).otherwise({
                 templateUrl: "views/home.html"
             })
@@ -308,4 +312,41 @@ angular.module('scorekeeper', ['player.services', 'game.services', 'user.service
                 }
 
             }
-        ]);
+        ])
+    .controller('CalculatorCtrl', ['$scope', 'GameService', 'PlayerService', function ($scope, GameService, PlayerService) {
+        $scope.playerNames = PlayerService.getAllPlayers();
+
+        var game = {"teamA": [],
+            "teamB": []
+        }
+        $scope.showResult = false;
+
+        $scope.newGame = game;
+
+        $scope.calculateGame = function () {
+
+            $scope.result = GameService.calculateGame(game.teamA[0], game.teamA[1], game.teamB[0], game.teamB[1])
+            $scope.showResult = true;
+            $scope.teamAResult = 'winner';
+            $scope.teamBResult = 'looser';
+        }
+
+        $scope.teamAStyle = function(){
+            var teamA = $scope.result.teamA[0].currentScore.mean + $scope.result.teamA[1].currentScore.mean;
+            var teamB = $scope.result.teamB[0].currentScore.mean + $scope.result.teamB[1].currentScore.mean;
+            if(teamA > teamB){
+                return 'winner';
+            }else{
+                return 'looser';
+            }
+        }
+        $scope.teamBStyle = function(){
+            var teamA = $scope.result.teamA[0].currentScore.mean + $scope.result.teamA[1].currentScore.mean;
+            var teamB = $scope.result.teamB[0].currentScore.mean + $scope.result.teamB[1].currentScore.mean;
+            if(teamB > teamA){
+                return 'winner';
+            }else{
+                return 'looser';
+            }
+        }
+    }]);

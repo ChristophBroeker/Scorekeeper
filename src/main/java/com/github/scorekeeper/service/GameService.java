@@ -32,6 +32,7 @@ import com.github.scorekeeper.persistence.entity.Player;
 import com.github.scorekeeper.persistence.entity.ResultType;
 import com.github.scorekeeper.persistence.entity.Score;
 import com.github.scorekeeper.persistence.entity.SuggestedGame;
+import com.github.scorekeeper.rest.vo.CalculatedGameVO;
 import com.github.scorekeeper.rest.vo.GameVO;
 import com.github.scorekeeper.rest.vo.ScoreBoardEntryVO;
 import com.google.common.base.Function;
@@ -71,6 +72,28 @@ public class GameService {
 		updatePlayerScores(gameEntity, gameInfo);
 		checkForSuggestedGame(gameEntity);
 		return gameRepository.save(gameEntity).getId();
+	}
+
+	@Transactional
+	public CalculatedGameVO calculateGame(long teamAPlayer1, long teamAPlayer2, long teamBPlayer1, long teamBPlayer2) {
+
+		Player tap1 = playerRepository.findOne(teamAPlayer1);
+		Player tap2 = playerRepository.findOne(teamAPlayer2);
+		Player tbp1 = playerRepository.findOne(teamBPlayer1);
+		Player tbp2 = playerRepository.findOne(teamBPlayer2);
+
+		ITeam teamA = new JSkillTeamAdapter(Lists.newArrayList(tap1, tap2));
+		ITeam teamB = new JSkillTeamAdapter(Lists.newArrayList(tbp1, tbp2));
+
+		Collection<ITeam> teams = Lists.newArrayList(teamA, teamB);
+
+		GameInfo gameInfo = GameInfo.getDefaultGameInfo();
+		double matchQuality = TrueSkillCalculator.calculateMatchQuality(gameInfo, teams);
+		CalculatedGameVO vo = new CalculatedGameVO();
+		vo.setGameQuality(matchQuality);
+		vo.setTeamA(PlayerService.convert(Lists.newArrayList(tap1, tap2)));
+		vo.setTeamB(PlayerService.convert(Lists.newArrayList(tbp1, tbp2)));
+		return vo;
 	}
 
 	@Transactional

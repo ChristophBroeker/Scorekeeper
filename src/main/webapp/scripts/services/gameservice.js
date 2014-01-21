@@ -26,6 +26,18 @@ angular.module('game.services', ['ngResource'], null)
 
         };
 
+        this.calculateGame = function (teamAPlayer1, teamAPlayer2, teamBPlayer1, teamBPlayer2) {
+            console.log("calculate Game_ " + teamAPlayer1 + " " + teamAPlayer2+ " " + teamBPlayer1+ " " + teamBPlayer2);
+
+
+            gameList = $resource('rest/calculate', {teamAPlayer1: teamAPlayer1, teamAPlayer2: teamAPlayer2, teamBPlayer1: teamBPlayer1, teamBPlayer2: teamBPlayer2}, {query: {method: 'GET', isArray: false}}).query();
+
+
+            return gameList
+
+
+        };
+
         this.addNewGame = function (newGame) {
             console.log("add new Game");
             $http({method: 'POST', url: 'rest/games', data: newGame})
