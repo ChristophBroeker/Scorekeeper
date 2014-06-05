@@ -1,5 +1,6 @@
 
 <div class="container" ng-controller="GamesCtrl">
+    <button ng-click="deleteLastGame()" ng-show="hasRole('SCOREADMIN')">{{ 'view.games.deletegame.button' | i18n }}</button>
     <form class="form-inline" ng-submit="addNewGame()" ng-show="hasRole('SCOREADMIN')">
         <h5>{{ 'view.games.newgame.title' | i18n }}</h5>
         <select class="span2" ng-model="newGame.teamA[0]">

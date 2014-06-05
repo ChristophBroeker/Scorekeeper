@@ -29,6 +29,8 @@
     "view.board.table.title.col7": "gewonnen:",
     "view.board.table.title.col8": "verloren:",
 
+    "view.games.deletegame.button": "Letztes Spiel löschen",
+    "view.games.deletegame.confirm": "Bist du dir gaaaaaaaaanz sicher, das du das letzte Spiel endgültig, unwiderrufbar und vollständig löschen möchtest?",
     "view.games.newgame.title": "neues Spiel eintragen:",
     "view.games.newgame.tap1.placeholder": "Team A Pl. 1",
     "view.games.newgame.tap2.placeholder": "Team A Pl. 2",
@@ -50,6 +52,7 @@
     "view.games.paging.current": "Seite: {0}",
     "view.games.paging.button.previous": "Vorherige Seite",
     "view.games.paging.button.next": "Nächste Seite",
+
 
     "view.player.newplayer.title": "neuen Spieler hinzufügen",
     "view.player.newplayer.input.placeholder": "Spielername",

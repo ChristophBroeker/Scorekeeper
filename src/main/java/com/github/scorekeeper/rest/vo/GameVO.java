@@ -12,6 +12,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 public class GameVO {
+	private Long gameId;
 	private List<Long> teamA;
 	private List<Long> teamB;
 	private Integer teamAScore;
@@ -31,6 +32,7 @@ public class GameVO {
 		this.setTeamAScore(gameEntity.getTeamAScore());
 		this.setTeamBScore(gameEntity.getTeamBScore());
 		this.setQuality(gameEntity.getQuality());
+		this.setGameId(gameEntity.getId());
 	}
 
 	private ArrayList<Long> convert(List<Player> players) {
@@ -97,6 +99,14 @@ public class GameVO {
 
 	public void setQuality(BigDecimal quality) {
 		this.quality = quality;
+	}
+
+	public Long getGameId() {
+		return gameId;
+	}
+
+	public void setGameId(Long gameId) {
+		this.gameId = gameId;
 	}
 
 }

@@ -302,4 +302,18 @@ public class GameService {
 		}
 		return result;
 	}
+
+	@Transactional
+	public void deleteGame(GameVO game) {
+		Game g = gameRepository.findOne(game.getGameId());
+		List<Player> teamA = g.getTeamA();
+		List<Player> teamB = g.getTeamB();
+		for (Player player : teamA) {
+			player.getScoreHistory().remove(player.getScoreHistory().size() - 1);
+		}
+		for (Player player : teamB) {
+			player.getScoreHistory().remove(player.getScoreHistory().size() - 1);
+		}
+		gameRepository.delete(g);
+	}
 }

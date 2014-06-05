@@ -57,4 +57,13 @@ public class GameController {
 
 		return suggestedGameService.createNewSuggestions();
 	}
+
+	@PreAuthorize("hasRole('SCOREADMIN')")
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public void deleteLastGame(@RequestBody GameVO game) {
+
+		gameService.deleteGame(game);
+	}
+
 }

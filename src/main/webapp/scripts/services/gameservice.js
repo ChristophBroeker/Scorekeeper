@@ -51,6 +51,29 @@ angular.module('game.services', ['ngResource'], null)
                 });
         };
 
+        this.deleteLastGame = function () {
+            var lastGame = gameList[0];
+            console.log("delete last Game: "+lastGame.gameId);
+
+
+            $http({method: 'POST', url: 'rest/games/delete', data: lastGame})
+                .success(function (response) {
+                    for (var i = gameList.length - 1; i >= 0; i--) {
+                        console.log("current: "+ gameList[i].gameId);
+                        if (gameList[i].gameId.toString() === lastGame.gameId.toString()) {
+                            console.log("splice list");
+                            gameList.splice(i, 1);
+                            break;
+                        }
+                    }
+
+                    console.log('success: ' + response.data);
+                })
+                .error(function (response) {
+                    console.log('error: ' + response);
+                });
+        };
+
         this.getScoreTable = function () {
             return  $resource('rest/scoreboard', {}, {query: {method: 'GET', isArray: true}}).query();
         };

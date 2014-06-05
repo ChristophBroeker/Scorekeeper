@@ -161,8 +161,8 @@ angular.module('scorekeeper', ['player.services', 'game.services', 'user.service
             }
         ])
     .controller('GamesCtrl',
-        ['$scope', '$route', 'PlayerService', 'GameService',
-            function ($scope, $route, PlayerService, GameService) {
+        ['$scope', '$route', 'PlayerService', 'GameService', 'I18n',
+            function ($scope, $route, PlayerService, GameService, I18n) {
                 $scope.playerNames = PlayerService.getAllPlayers();
 
                 $scope.itemsPerPage = 1000;
@@ -203,6 +203,16 @@ angular.module('scorekeeper', ['player.services', 'game.services', 'user.service
                         game.result = "DRAW";
                     }
                     GameService.addNewGame(game);
+
+                };
+
+                $scope.deleteLastGame = function() {
+                    if (confirm(I18n.translate('view.games.deletegame.confirm'))) {
+                        console.log('LÖSCHE');
+                        GameService.deleteLastGame();
+                    } else {
+                        console.log('Nö, doch nicht');
+                    }
 
                 };
 

@@ -27,6 +27,8 @@
     "view.board.table.title.col5": "won:",
     "view.board.table.title.col6": "lost:",
 
+    "view.games.deletegame.button": "delete last game",
+    "view.games.deletegame.confirm": "sure?",
     "view.games.newgame.title": "add new Game:",
     "view.games.newgame.tap1.placeholder": "Team A Pl. 1",
     "view.games.newgame.tap2.placeholder": "Team A Pl. 2",

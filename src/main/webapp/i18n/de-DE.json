@@ -27,6 +27,8 @@
     "view.board.table.title.col5": "gewonnen:",
     "view.board.table.title.col6": "verloren:",
 
+    "view.games.deletegame.button": "Letztes Spiel löschen",
+    "view.games.deletegame.confirm": "Bist du dir gaaaaaaaaanz sicher, das du das letzte Spiel endgültig, unwiderrufbar und vollständig löschen möchtest?",
     "view.games.newgame.title": "neues Spiel eintragen:",
     "view.games.newgame.tap1.placeholder": "Team A Pl. 1",
     "view.games.newgame.tap2.placeholder": "Team A Pl. 2",
